@@ -1,0 +1,21 @@
+Estructura
+
+EventConnect/
+│
+├── web/            (main)
+│   └── index.php   
+│
+├── objetos/        (aca van las clases)
+│   └── Usuario.php
+│
+├── frontEnd/           (cada pagina que se muestre)
+│   ├── login.php
+│   └── paginaPrincipal.php
+│
+├── conexionDB/         (clase para conexion de base de datos)
+│   └── database.php
+│
+└── assets/         (recursos, como imagenes, js o css)
+    ├── css/
+    └── js/
+
