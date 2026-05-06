@@ -2,8 +2,8 @@ Estructura
 
 EventConnect/
 │
-├── web/            (main)
-│   └── index.php   
+├── index.php             (main)
+│     
 │
 ├── objetos/        (aca van las clases)
 │   └── Usuario.php
