@@ -2,6 +2,7 @@
 
     include "../database/conexion.php";
     include "../objetos/usuario.php";
+    include "../database/funcionesDB";
 
     session_start();
     
