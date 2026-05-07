@@ -1,6 +1,6 @@
 <?php
 
-    include "../database/conexion.php";
+    include "conexion.php";
     include "../objetos/usuario.php";
 
             /*   EJEMPLO DE CLASE, CONSULTA SQL PREVENTIVA DE INYECT
