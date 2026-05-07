@@ -34,8 +34,8 @@
             while($tupla = mysqli_fetch_array($resultado))
             {
                 if($accion == 0)
-                {
-                    if($tupla['nickname'] == $nickName && $tupla['password'] == $password)
+                {   //Se lee con esa funcion la contrasenia ya que esta con hash
+                    if($tupla['nickname'] == $nickName && password_verify($password, $tupla['password']))
                     {
                         $pass = true;
                         break;
