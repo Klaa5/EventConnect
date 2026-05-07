@@ -14,7 +14,15 @@ class Usuario
     {
         $this->nickName = $nickName;
         $this->password = $password;
-        $this->link = $link;
+        
+        if($link == null)
+        {
+            $this->link = "Sin descripcion";
+        }
+        else
+        {
+            $this->link = $link;
+        }
     }
 
     public function getNickName()
@@ -30,6 +38,25 @@ class Usuario
     public function getLink()
     {
         return $this->link;
+    }
+
+    public function getRankPromedio()
+    {
+        return $this->ranks;
+    }
+
+    public function registrarUsuario($nickName, $password, $conexion)
+    {
+
+        //ver si este hasheo es efectivo o cambiarlo por otro cifrado:
+            //para leer hay que usar esto:
+            // password_verify("Constasenia iterada", $passwordSEC);
+        $passwordSEC = password_hash($password, PASSWORD_BCRYPT);
+
+        $consulta = $conexion->prepare("INSERT INTO Usuario (nickname, password, link) values (?, ?)");
+        $consulta->bind_param("ss", $nickName, $passwordSEC);
+        $consulta->execute();
+
     }
 }
 

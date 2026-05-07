@@ -6,6 +6,31 @@
     <title>EventConnect - Login</title>
 </head>
 <body>
-    
+<h4>Iniciar Sesion</h4>
+<form action="control/login.php" method="post">
+
+    <p>Ingrese Usuario</p>
+    <input type="text" name="nickName" id="nickName">
+    <p>Ingrese Contraseña</p>
+    <input type="password" name="password" id="password">
+    <input type="submit" value="Iniciar Sesión" name="action">
+
+
+
+</form>
+
+<hr>
+<h4>Crear Cuenta  </h4> <br>
+<form action="control/login.php" method="post">
+    <p>Ingrese Nombre de Usuario</p>
+    <input type="text" name="nickNameReg" id="nickNameReg">
+    <p>Ingrese Contraseña</p>
+    <input type="password" name="passwordReg" id="passwordReg">
+    <input type="submit" value="Registrarse" name="action">
+</form>
+
+
+
+
 </body>
 </html>

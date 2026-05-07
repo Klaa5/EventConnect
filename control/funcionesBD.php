@@ -1,7 +1,7 @@
 <?php
 
     include "../database/conexion.php";
-
+    include "../objetos/usuario.php";
 
             /*   EJEMPLO DE CLASE, CONSULTA SQL PREVENTIVA DE INYECT
 
@@ -18,23 +18,44 @@
 
 
 
-    function buscarCuenta($nickName, $password, $conexion)
+    function buscarCuenta($nickName, $password, $conexion, $accion)
     {
+
+        //Accion tiene estos modos:
+        //0 busca que exista ese usuario registrado
+        //1 solo busca el nickname
+
         $pass = false;
         $sql = "SELECT * FROM Usuario";
         $resultado = mysqli_query($conexion, $sql);
 
-        while($tupla = mysqli_fetch_array($resultado))
+        if($accion == 0)
         {
-            if($tupla['nickname'] == $nickName && $tupla['password'] == $password)
+            while($tupla = mysqli_fetch_array($resultado))
             {
-                $pass = true;
-                break;
-            }
+                if($accion == 0)
+                {
+                    if($tupla['nickname'] == $nickName && $tupla['password'] == $password)
+                    {
+                        $pass = true;
+                        break;
+                    }
+                }
 
+                if($accion == 1)
+                {
+                    if($tupla['nickname'] == $nickName)
+                    {
+                        $pass = true;
+                        break;
+                    } 
+                }
+
+            }
+            
+            return $pass;
         }
-        
-        return $pass;
+
     }
 
 
