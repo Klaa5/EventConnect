@@ -2,7 +2,7 @@
 
     include "../database/conexion.php";
     include "../objetos/usuario.php";
-    include "../database/funcionesDB";
+    include "../database/funcionesDB.php";
 
     session_start();
     
@@ -15,8 +15,8 @@
         //Caso admin...
         if($_POST['nickName'] == "admin" && $_POST['password'] == "admin")
         {
-            header("Location: ../paginas/paginaPrincipal.php"); //pendiente ver que hacer con el admin...
             $_SESSION['nickName'] = $_POST['nickName'];
+            header("Location: ../paginas/paginaPrincipal.php"); //pendiente ver que hacer con el admin...
             exit();
 
         }
@@ -24,6 +24,7 @@
 
         if(buscarCuenta($_POST['nickName'], $_POST['password'], $conexion, 0))
         {
+            $_SESSION['nickName'] = $_POST['nickName'];
             header("Location: ../paginas/paginaPrincipal.php");
             exit(); 
         }
