@@ -1,14 +1,12 @@
 <?php
-
     include "../database/conexion.php";
     include "../objetos/usuario.php";
-    include "../database/funcionesDB.php";
-
+    include "../database/funcionesBD.php";
     session_start();
-    
+
     $conexion = new Conexion();
     $conexion = $conexion->iniciarDB();
-
+   
 
     if($_POST["action"] == "Iniciar Sesión")
     {
@@ -39,7 +37,7 @@
     if($_POST["action"] == "Registrarse")
     {
         //verifico que no deje vacio y que esa cuenta no exista.
-        if(($_POST['nickNameReg'] != "" && $_POST['passwordReg'] != "") && !buscarCuenta($_POST['nickNameReg'], $_POST['passwordReg'], $conexion, 1))
+        if(($_POST['nickNameReg'] != "" && $_POST['passwordReg'] != "") && !buscarCuenta($_POST['nickNameReg'], "", $conexion, 1))
         {
             $usuario = new Usuario($_POST['nickNameReg'], $_POST['passwordReg'], null);
             $usuario->registrarUsuario($_POST['nickNameReg'], $_POST['passwordReg'], $conexion);
