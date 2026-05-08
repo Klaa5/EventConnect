@@ -53,7 +53,7 @@ class Usuario
             // password_verify("Constasenia iterada", $passwordSEC);
         $passwordSEC = password_hash($password, PASSWORD_BCRYPT);
 
-        $consulta = $conexion->prepare("INSERT INTO Usuario (nickname, password, link) values (?, ?)");
+        $consulta = $conexion->prepare("INSERT INTO Usuario (nickname, password) values (?, ?)");
         $consulta->bind_param("ss", $nickName, $passwordSEC);
         $consulta->execute();
 
