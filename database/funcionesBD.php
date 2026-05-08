@@ -1,7 +1,5 @@
 <?php
 
-    include "conexion.php";
-    include "../objetos/usuario.php";
 
             /*   EJEMPLO DE CLASE, CONSULTA SQL PREVENTIVA DE INYECT
 
@@ -29,9 +27,9 @@
         $sql = "SELECT * FROM Usuario";
         $resultado = mysqli_query($conexion, $sql);
 
-        if($accion == 0)
-        {
-            while($tupla = mysqli_fetch_array($resultado))
+        
+        
+        while($tupla = mysqli_fetch_array($resultado))
             {
                 if($accion == 0)
                 {   //Se lee con esa funcion la contrasenia ya que esta con hash
@@ -54,7 +52,7 @@
             }
             
             return $pass;
-        }
+        
 
     }
 
