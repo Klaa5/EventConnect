@@ -16,8 +16,6 @@
     <input type="password" name="password" id="password">
     <input type="submit" value="Iniciar Sesión" name="action">
 
-
-
 </form>
 
 <hr>
