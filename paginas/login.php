@@ -34,7 +34,7 @@
 
 <br><br><br><br><br>
 
-<p><font size="1">© 2026 EventConnect - MATEX inc</font></p>
+<p><font size="1">© 1996 EventConnect - MATEX inc</font></p>
 
 
 </body>
