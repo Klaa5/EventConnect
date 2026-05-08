@@ -19,7 +19,7 @@
 </form>
 
 <hr>
-<h4>Crear Cuenta  </h4> <br>
+<h4>Crear Cuenta  </h4> 
 <form action="../control/verificacionDatos.php" method="post">
     <p>Ingrese Nombre de Usuario</p>
     <input type="text" name="nickNameReg" id="nickNameReg">
@@ -29,8 +29,8 @@
 </form>
 <br><br>
 
-<span>Problemas al registrarse? Haz </span>
-<a href="https://www.youtube.com/watch?v=A7xhaE9oF5A">clck aca</a>
+<span>Problemas al registrarse? Haz click </span>
+<a href="https://www.youtube.com/watch?v=Hg469wSrZhI">aqui</a>
 
 <br><br><br><br><br>
 
