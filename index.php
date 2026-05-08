@@ -1,16 +1,15 @@
 <?php
+    session_start();
 
-session_start();
 
-
-    if($_SESSION['nickName'] != null)   //Al ingresar verifico si el usuario se ha logueado.
+    if(!empty($_SESSION['nickName']))   //Al ingresar verifico si el usuario se ha logueado.
     {
-        header("Location: paginaPrincipal.php");
+        header("Location: paginas/paginaPrincipal.php");
         exit();
     }
     else
     {
-        header("Location: login.php");
+        header("Location: paginas/login.php");
         exit();
     }
 
