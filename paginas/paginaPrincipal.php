@@ -6,8 +6,12 @@
     <title>EventConnect - Principal</title>
     <link rel="icon" type="image/png" href="../assets/EventConnect.png">
 </head>
-<body>
-    
+<body style="background-color: lightblue;">
+    <h2>EventConnect - main</h2><br><br>
+    <hr>
+    <form action="crearSala.php">
+        <button type="submit">Nueva sala</button>
+    </form>
     <h6>Bien, inició sesion gordon freeman.</h6>
 
 
