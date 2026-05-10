@@ -1,21 +1,5 @@
 <?php
 
-
-            /*   EJEMPLO DE CLASE, CONSULTA SQL PREVENTIVA DE INYECT
-
-                    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE email = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $usuario = $result->fetch_assoc();
-
-            "s" // string
-            "i" // integer
-            "d" // double (decimal)
-            "b" // blob */
-
-
-
     function buscarCuenta($nickName, $password, $conexion, $accion)
     {
 
