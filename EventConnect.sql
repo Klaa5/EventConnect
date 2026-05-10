@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 04-05-2026 a las 20:53:17
+-- Tiempo de generación: 10-05-2026 a las 04:25:18
 -- Versión del servidor: 10.11.14-MariaDB-0+deb12u2
 -- Versión de PHP: 8.2.30
 
@@ -68,7 +68,7 @@ CREATE TABLE `Ranking` (
 --
 
 CREATE TABLE `Sala` (
-  `Id_sala` int(11) NOT NULL,
+  `Id_sala` int(11) NOT NULL COMMENT 'No se setea, es Auto Increment!',
   `Titulo` varchar(100) NOT NULL,
   `Descripcion` varchar(500) DEFAULT NULL,
   `Modalidad` varchar(20) NOT NULL,
@@ -77,6 +77,15 @@ CREATE TABLE `Sala` (
   `nickname` varchar(100) NOT NULL COMMENT 'nick del creador',
   `Estado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `Sala`
+--
+
+INSERT INTO `Sala` (`Id_sala`, `Titulo`, `Descripcion`, `Modalidad`, `Ubicacion`, `Fecha`, `nickname`, `Estado`) VALUES
+(1, 'ALGO', 'PRUEBA1', 'virtual', 'MI PC', '2026-05-12 12:30:00', '1', 'EN_PREPARACION'),
+(2, 'ALGO2', 'PRUEBA2', 'virtual', 'MI PC2', '2026-05-15 12:30:00', '1', 'EN_PREPARACION'),
+(3, 'ALGO3', 'PRUEBA3', 'virtual', 'MI PC3', '2026-05-16 12:30:00', '1', 'EN_PREPARACION');
 
 -- --------------------------------------------------------
 
@@ -89,6 +98,13 @@ CREATE TABLE `Usuario` (
   `password` varchar(100) NOT NULL,
   `Link` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `Usuario`
+--
+
+INSERT INTO `Usuario` (`nickname`, `password`, `Link`) VALUES
+('1', '$2y$10$gMjNyg3ij9aVR3kLowOhd.6nbMabes5d0Hze75DQXtS2PyDVsv6vO', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -131,6 +147,16 @@ ALTER TABLE `Sala`
 --
 ALTER TABLE `Usuario`
   ADD PRIMARY KEY (`nickname`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `Sala`
+--
+ALTER TABLE `Sala`
+  MODIFY `Id_sala` int(11) NOT NULL AUTO_INCREMENT COMMENT 'No se setea, es Auto Increment!', AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
