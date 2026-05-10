@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="../assets/EventConnect.png">
 </head>
 <body style="background-color: lightblue;">
-    <form action="crearSalaServer.php" method="post">
+    <form action="../control/crearSalaServer.php" method="post">
 <h2>EventConnect - Crear nueva sala</h2><br><hr><br>
     <p>Titulo de la sala:</p>
     <input type="text" name="titulo" id="titulo"><br>
@@ -21,7 +21,7 @@
     <p>Ubicacion:</p>
     <input type="text" name="ubicacion" id=""ubicacion> <br>
     <p>Fecha a realizar:</p>
-    <input type="datetime" name="fechaHora" id="fechaHora"><br><br>
+    <input type="datetime-local" name="fechaHora" id="fechaHora"><br><br>
     <input type="submit" value="Crear">
 
     </form>
