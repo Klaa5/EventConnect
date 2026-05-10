@@ -18,15 +18,7 @@ class Sala
 
     public function __construct($idSala, $titulo, $descripcion, $modalidad, $nickNameCreador, $ubicacion, $fechaHora, $estado)
     {
-        if($idSala == -1)
-        {
-            $this->idSala = 0; //Es auto increment en la base de datos, esta parte solo se setea cuando traes datos desde la base de datos.
-        }
-        else
-        {
-            $this->idSala = $idSala;
-        }
-
+        $this->idSala = $idSala;  //Si es un objeto que se crea para almacenar en la bd, setear con -1 o null
         $this->titulo = $titulo;
         $this->descripcion = $descripcion;
         $this->modalidad = $modalidad;
@@ -97,7 +89,7 @@ class Sala
 
     public function registrarSala($conexion, $datosSala)
     {   
-        if($this->idSala == 0)
+        if($this->idSala == null || $this->idSala == -1) //Si es un objeto dirigido a ser almacenado (se envia como -1 o null))...
         {    
             $instruccion = $conexion->prepare("INSERT INTO Sala (Titulo, Descripcion, Modalidad, Ubicacion, Fecha, nickname, Estado) VALUES (?, ?, ?, ?, ?, ?, ?)");
             $instruccion->bind_param("sssssss", $this->titulo, $this->descripcion, $this->modalidad, $this->ubicacion, $this->fechaHora, $this->nickNameCreador, $this->estado);
