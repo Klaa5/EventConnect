@@ -39,6 +39,19 @@
             
 
         }
+
+        public function registrarUsuario($newUser, $conexion)
+        {
+            //ver si este hasheo es efectivo o cambiarlo por otro cifrado:
+                //para leer hay que usar esto:
+                // password_verify("Constasenia iterada", $passwordSEC);
+            $passwordSEC = password_hash($newUser->getPassword(), PASSWORD_BCRYPT);
+
+            $consulta = $conexion->prepare("INSERT INTO Usuario (nickname, password) values (?, ?)");
+            $consulta->bind_param("ss", $newUser->getNickName(), $passwordSEC);
+            $consulta->execute();
+
+        }
     }
 
 ?>
