@@ -16,6 +16,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventConnect - Visor de Sala</title>
+    <link rel="icon" type="image/png" href="../assets/EventConnect.png">
 </head>
 <body style="background-color: lightblue;">
     <?php
@@ -27,7 +28,8 @@ session_start();
     <h2>EventConnect - Visor de Sala</h2>
     <br>
     <hr>
-    <h3><?php echo "Sala: " . $sala->getTitulo() . " Modalidad: " . $sala->getModalidad(); ?></h3>
+    <h3>Nombre Sala: <?php echo $sala->getTitulo(); ?></h3>
+    <h4>Modalidad: <?php echo $sala->getModalidad(); ?></h4>
     <hr>
     <p>Descripción: <?php echo $sala->getDescripcion(); ?></p>
     <hr>
