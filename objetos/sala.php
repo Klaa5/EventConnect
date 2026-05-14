@@ -10,6 +10,7 @@ class Sala
     private $ubicacion;          //queda en null si es virtual
     private $fechaHora;
     private $estado;
+    private $participantes = [];     
 
     //LISTA ESTADOS: pendiente crear un enum si da el tiempo.
     //EN_PREPARACION
@@ -85,6 +86,16 @@ class Sala
     public function getEstado()
     {
         return $this->estado;
+    }
+
+    public function getParticipantes()
+    {
+        return $this->participantes;
+    }
+
+    public function agregarParticipante($nickName)
+    {
+        $this->participantes[] = $nickName;
     }
 
 
