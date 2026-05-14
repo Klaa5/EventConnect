@@ -21,9 +21,12 @@
 
             while ($fila = mysqli_fetch_assoc($salas)) 
             {
-                echo "<hr>";
-                echo "Sala: " . $fila['Titulo'] . " Modalidad: " . $fila['Modalidad'] . "<br>";
-                echo "<hr>";
+                if($fila['Estado'] != "FINALIZADA" && $fila['Estado'] != "EN_CURSO")  //Solo mostrara las salas vigentes.
+                {
+                    echo "<hr>";
+                    echo "Sala: " . $fila['Titulo'] . " Modalidad: " . $fila['Modalidad'] . "<br>";
+                    echo "<hr>";
+                }
             }
 
         }
