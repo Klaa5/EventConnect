@@ -8,7 +8,7 @@
 </head>
 <body style="background-color: lightblue;">
 <h4>Iniciar Sesion</h4>
-<form action="../control/verificacionLoginRegistro.php" method="post">
+<form action="../control/sessionManager.php" method="post">
 
     <p>Ingrese Usuario</p>
     <input type="text" name="nickName" id="nickName">
@@ -20,7 +20,7 @@
 
 <hr>
 <h4>Crear Cuenta  </h4> 
-<form action="../control/verificacionLoginRegistro.php" method="post">
+<form action="../control/sessionManager.php" method="post">
     <p>Ingrese Nombre de Usuario</p>
     <input type="text" name="nickNameReg" id="nickNameReg">
     <p>Ingrese Contraseña</p>
