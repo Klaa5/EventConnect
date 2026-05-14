@@ -3,6 +3,15 @@
 
     class salaBD
     {
+        public function getSala($idSala, $conexion)
+        {   
+            $consulta = "SELECT * FROM Sala WHERE Id_sala = ? NATURAL JOIN Participa WHERE Id_sala = ?"; 
+            $instruccion = $conexion->prepare($consulta);
+            $instruccion->bind_param("i", $idSala);
+            $instruccion->execute();
+            return $instruccion->get_result();
+        }
+
         public function getAllSalas($conexion)
         {
             $consulta = "SELECT * FROM Sala";
