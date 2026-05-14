@@ -12,7 +12,14 @@
     <form action="crearSala.php">
         <button type="submit">Nueva sala</button>
     </form>
-    <h6>Bien, inició sesion gordon freeman.</h6>
+    
+    <hr>
+    <h3>Salas disponibles:</h3>
+    <?php
+        include "../control/paginaPrincipal.php";
+        $paginaPrincipal = new PaginaPrincipal();
+        $paginaPrincipal->mostrarSalas();
+    ?>
 
 
 </body>
