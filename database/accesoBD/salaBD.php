@@ -10,11 +10,11 @@ include "../objetos/sala.php";
             $instruccion = $conexion->prepare($consulta);
             $instruccion->bind_param("i", $idSala);
             $instruccion->execute();
-            $instruccion->get_result();
+            $resultado = $instruccion->get_result();
 
-            if($instruccion->get_result()->num_rows > 0)    //Si hay integrantes (no cuenta al creador) entonces se obtienen todos ellos
+            if($resultado->num_rows > 0)    //Si hay integrantes (no cuenta al creador) entonces se obtienen todos ellos
             {
-                $primeraFila = $instruccion->fetch_assoc(); //Obtengo la primer fila.
+                $primeraFila = $resultado->fetch_assoc(); //Obtengo la primer fila.
 
                 //Esto ya itera al usar la funcion de arriba, asi que cuando empiece el while empieza desde el segundo integrante!
                 //Agrego los datos de la sala y del primer integrante.
@@ -22,7 +22,7 @@ include "../objetos/sala.php";
                 $datosSala->agregarParticipante($primeraFila['nickname']);  //Este es el primer participante, que casi se me pierde.
 
                 //Aca obtengo el nombre de cada participante.
-                while($fila = $instruccion->fetch_assoc())
+                while($fila = $resultado->fetch_assoc())
                 {
                     $datosSala->agregarParticipante($fila['nickname']);
                 }
