@@ -28,7 +28,7 @@ session_start();
         <option value="en_persona">En persona</option>
     </select><br>
     <p>Ubicacion:</p>
-    <input type="text" name="ubicacion" id=""ubicacion> <br>
+    <input type="text" name="ubicacion" id="ubicacion"> <br>
     <p>Fecha a realizar:</p>
     <input type="datetime-local" name="fechaHora" id="fechaHora"><br><br>
     <input type="submit" value="Crear">
