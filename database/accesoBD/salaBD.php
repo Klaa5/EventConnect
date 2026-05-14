@@ -1,5 +1,4 @@
 <?php
-include "../objetos/usuario.php";
 include "../objetos/sala.php";
 
     class salaBD
