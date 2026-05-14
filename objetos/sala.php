@@ -87,23 +87,7 @@ class Sala
         return $this->estado;
     }
 
-    public function registrarSala($conexion, $datosSala)
-    {   
-        if($this->idSala == null || $this->idSala == -1) //Si es un objeto dirigido a ser almacenado (se envia como -1 o null))...
-        {    
-            $instruccion = $conexion->prepare("INSERT INTO Sala (Titulo, Descripcion, Modalidad, Ubicacion, Fecha, nickname, Estado) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $instruccion->bind_param("sssssss", $this->titulo, $this->descripcion, $this->modalidad, $this->ubicacion, $this->fechaHora, $this->nickNameCreador, $this->estado);
-            
-            $resultado = $instruccion->execute(); //la ejecucion tambien retorna si salio bien o no.
 
-            return $resultado;  //retorna true si se registro, si no retorna false directamente.
-            
-        }
-        else
-        {
-            return false;
-        }
-    }
 }
 
 ?>
