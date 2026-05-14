@@ -17,7 +17,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventConnect - Visor de Sala</title>
 </head>
-<body>
+<body style="background-color: lightblue;">
     <?php
         include "../control/salaManager.php";
         $salaManager = new SalaManager($_POST['idSala']);
