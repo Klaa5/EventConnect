@@ -18,7 +18,7 @@
             $accesoDBSala = new salaBD();
             $salas = $accesoDBSala->getAllSalas($this->conexion);
 
-            echo "<form action='../control/visorSala.php' method='POST'>";           
+            echo "<form action='../paginas/visorSala.php' method='POST'>";           
             echo "<hr>";
             while ($fila = mysqli_fetch_assoc($salas)) 
             {
