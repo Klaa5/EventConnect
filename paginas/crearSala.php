@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+    if(empty($_SESSION['nickName']))   
+    {
+        header("Location: login.php");
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
