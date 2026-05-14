@@ -1,12 +1,13 @@
 <?php
     include "../database/conexion.php";
     include "../objetos/usuario.php";
-    include "../database/funcionesBD.php";
+    include "../database/accesoBD/usuarioBD.php";
     session_start();
 
     $conexion = new Conexion();
     $conexion = $conexion->iniciarDB();
    
+    $accesoUserBD = new UsuarioBD();
 
     if($_POST["action"] == "Iniciar Sesión")
     {
@@ -19,8 +20,9 @@
 
         }
         
+        
 
-        if(buscarCuenta($_POST['nickName'], $_POST['password'], $conexion, 0))
+        if($accesoUserBD->buscarCuenta($_POST['nickName'], $_POST['password'], $conexion, 0))
         {
             $_SESSION['nickName'] = $_POST['nickName'];
             header("Location: ../paginas/paginaPrincipal.php");
@@ -37,7 +39,7 @@
     if($_POST["action"] == "Registrarse")
     {
         //verifico que no deje vacio y que esa cuenta no exista.
-        if(($_POST['nickNameReg'] != "" && $_POST['passwordReg'] != "") && !buscarCuenta($_POST['nickNameReg'], "", $conexion, 1))
+        if(($_POST['nickNameReg'] != "" && $_POST['passwordReg'] != "") && !$accesoUserBD->buscarCuenta($_POST['nickNameReg'], "", $conexion, 1))
         {
             $usuario = new Usuario($_POST['nickNameReg'], $_POST['passwordReg'], null);
             $usuario->registrarUsuario($_POST['nickNameReg'], $_POST['passwordReg'], $conexion);
