@@ -52,7 +52,7 @@ include "../objetos/sala.php";
         {   
             if($datosSala->getIdSala() == null || $datosSala->getIdSala() == -1) //Si es un objeto dirigido a ser almacenado (se envia como -1 o null))...
             {    
-                $instruccion = $conexion->prepare("INSERT INTO Sala (Titulo, Descripcion, Modalidad, Ubicacion, Fecha, nickname, Estado) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                $instruccion = $conexion->prepare("INSERT INTO Sala (Titulo, Descripcion, Modalidad, Ubicacion, Fecha, nicknameCreador, Estado) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 $instruccion->bind_param("sssssss", $datosSala->getTitulo(), $datosSala->getDescripcion(), $datosSala->getModalidad(), $datosSala->getUbicacion(), $datosSala->getFechaHora(), $datosSala->getNickNameCreador(), $datosSala->getEstado());
                 
                 $resultado = $instruccion->execute(); //la ejecucion tambien retorna si salio bien o no.
