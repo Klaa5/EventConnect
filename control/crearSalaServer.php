@@ -1,7 +1,8 @@
 <?php
     include "../database/conexion.php";
     include "../objetos/sala.php";
-    include "../objetos/usuario.php";    
+    include "../objetos/usuario.php";
+    include "../database/accesoBD/salaBD.php";    
     session_start();
 
     $conexion = new Conexion();
@@ -12,8 +13,9 @@
     {
 
         $salaNueva = new Sala(null, $_POST["titulo"], $_POST["descripcion"], $_POST["modalidad"], $_SESSION["nickName"], $_POST["ubicacion"], $_POST["fechaHora"], "creando");
+        $salaBD = new salaBD();
         
-        if($salaNueva->registrarSala($conexion, $salaNueva))  //Se crea la sala.
+        if($salaBD->registrarSala($conexion, $salaNueva))  //Se crea la sala.
         {   //PENDIENTE VER COMO DAR UN MENSAJE DE SUCCESS
             header("Location: ../paginas/paginaPrincipal.php"); //redirige a la pagina principal si todo sale bien
             exit();
