@@ -45,19 +45,7 @@ class Usuario
         return $this->ranks;
     }
 
-    public function registrarUsuario($nickName, $password, $conexion)
-    {
-
-        //ver si este hasheo es efectivo o cambiarlo por otro cifrado:
-            //para leer hay que usar esto:
-            // password_verify("Constasenia iterada", $passwordSEC);
-        $passwordSEC = password_hash($password, PASSWORD_BCRYPT);
-
-        $consulta = $conexion->prepare("INSERT INTO Usuario (nickname, password) values (?, ?)");
-        $consulta->bind_param("ss", $nickName, $passwordSEC);
-        $consulta->execute();
-
-    }
+    
 }
 
 
