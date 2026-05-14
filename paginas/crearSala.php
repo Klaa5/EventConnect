@@ -24,8 +24,8 @@ session_start();
     <input type="text" name="descripcion" id="descripcion"><br>
     <p>Modalidad:</p>
     <select name="modalidad">
-        <option value="virtual">Virtual</option>
-        <option value="en_persona">En persona</option>
+        <option value="Virtual">Virtual</option>
+        <option value="En Persona">En persona</option>
     </select><br>
     <p>Ubicacion:</p>
     <input type="text" name="ubicacion" id="ubicacion"> <br>
