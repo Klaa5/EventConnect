@@ -1,6 +1,5 @@
 <?php
     include "../database/conexion.php";
-    include "../objetos/usuario.php";
     include "../database/accesoBD/salaBD.php";
 
     class SalaManager
