@@ -19,20 +19,36 @@
             $salas = $accesoDBSala->getAllSalas($this->conexion);
 
             
-            while ($fila = mysqli_fetch_assoc($salas)) 
+            while ($fila = mysqli_fetch_assoc($salas))
             {
-                if($fila['Estado'] != "FINALIZADA" && $fila['Estado'] != "EN_CURSO")  //Solo mostrara las salas vigentes.
+                if($fila['Estado'] != "FINALIZADA" && $fila['Estado'] != "EN_CURSO")
                 {
-                    echo "<form action='../paginas/visorSala.php' method='POST'>";           
-                    echo "<hr>";
-                    echo "<input type='hidden' name='idSala' value='" . $fila['Id_sala'] . "'>";
-                    echo "<button type='submit'>";
-                    echo "Sala: " . $fila['Titulo'];
-                    echo "<br>";
-                    echo "Modalidad: " . $fila['Modalidad'];
-                    echo "</button>";
-                    echo "</form>";
-                    echo "<hr>";
+                    echo "
+                    <form action='../paginas/visorSala.php' method='POST' class='sala-form'>
+
+                        <input
+                            type='hidden'
+                            name='idSala'
+                            value='".$fila['Id_sala']."'
+                        >
+
+                        <button type='submit' class='sala-card'>
+
+                            <div class='sala-titulo'>
+                                ".$fila['Titulo']."
+                            </div>
+
+                            <div class='sala-info'>
+                                Modalidad: ".$fila['Modalidad']."
+                            </div>
+
+                            <div class='sala-info'>
+                                Estado: ".$fila['Estado']."
+                            </div>
+
+                        </button>
+
+                    </form>";
                 }
             }
 
