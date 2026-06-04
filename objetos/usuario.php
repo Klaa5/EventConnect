@@ -5,16 +5,25 @@ class Usuario
 {
     private $nickName;
     private $password;
+    private $nombre;
+    private $apellido;
+    private $email;
+    private $edad;
     private $link;
     private $ranks = [];     //lista de objetos con las evaluaciones hacia este usuario
     private $rankPromedio;
+    private $verifiedUser;
 
 
-    public function __construct($nickName, $password, $link)
+    public function __construct($nickName, $password, $nombre, $apellido, $email, $edad, $link, $verifiedUser)
     {
         $this->nickName = $nickName;
         $this->password = $password;
-        
+        $this->nombre = $nombre;
+        $this->apellido = $apellido;
+        $this->email = $email;
+        $this->edad = $edad;
+
         if($link == null)
         {
             $this->link = "Sin descripcion";
@@ -23,6 +32,9 @@ class Usuario
         {
             $this->link = $link;
         }
+
+        $this->verifiedUser = $verifiedUser;
+        
     }
 
     public function getNickName()
@@ -45,11 +57,31 @@ class Usuario
         return $this->ranks;
     }
 
-    
+    public function getVerifiedUser()
+    {
+        return $this->verifiedUser;
+    }
+
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    public function getApellido()
+    {
+        return $this->apellido;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function getEdad()
+    {
+        return $this->edad;
+    }
+   
 }
-
-
-
-
 
 ?>
