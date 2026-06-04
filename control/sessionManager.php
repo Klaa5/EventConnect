@@ -49,7 +49,7 @@
         //verifico que no deje vacio y que esa cuenta no exista.
         if(($_POST['nickNameReg'] != "" && $_POST['passwordReg'] != "") && !$accesoUserBD->buscarCuenta($_POST['nickNameReg'], "", $conexion, 1))
         {
-            $usuario = new Usuario($_POST['nickNameReg'], $_POST['passwordReg'], null);
+            $usuario = new Usuario($_POST['nickNameReg'], $_POST['passwordReg'], $_POST['nombreUser'], $_POST['apellidoUser'], $_POST['emailUser'], $_POST['edadUser'], null, false);
             $accesoUserBD->registrarUsuario($usuario, $conexion);
             header("Location: ../paginas/login.php");
             exit();
