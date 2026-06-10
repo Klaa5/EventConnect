@@ -17,7 +17,7 @@ session_start();
 </head>
 <body style="background-color: lightblue;">
 <h4>Iniciar Sesion</h4>
-<form action="../control/sessionManager.php" method="post">
+<form action="../control/controller.php" method="post">
 
     <p>Ingrese Usuario</p>
     <input type="text" name="nickName" id="nickName">
@@ -29,7 +29,7 @@ session_start();
 
 <hr>
 <h4>Crear Cuenta  </h4> 
-<form action="../control/sessionManager.php" method="post">
+<form action="../control/controller.php" method="post">
     <p>Ingrese Nombre de Usuario</p>
     <input type="text" name="nickNameReg" id="nickNameReg">
     <p>Ingrese Contraseña</p>

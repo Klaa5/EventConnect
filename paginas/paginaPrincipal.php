@@ -22,7 +22,7 @@ session_start();
     <form action="crearSala.php">
         <button type="submit">Nueva sala</button>
     </form>
-    <form action="../control/sessionManager.php" method="post">
+    <form action="../control/controller.php" method="post">
         <input type="submit" value="Cerrar Sesión" name="action">
     </form>
     
