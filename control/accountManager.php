@@ -1,9 +1,7 @@
 <?php
-    include "../database/conexion.php";
-    include "../objetos/usuario.php";
+    include "../database/accesoBD/usuarioBD.php";
     
     class accountManager
-
     {
         private $conexion;
         private $accesoUserBD;

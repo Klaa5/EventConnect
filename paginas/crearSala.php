@@ -31,7 +31,7 @@ session_start();
     <input type="text" name="ubicacion" id="ubicacion"> <br>
     <p>Fecha a realizar:</p>
     <input type="datetime-local" name="fechaHora" id="fechaHora"><br><br>
-    <input type="submit" value="Crear">
+    <input type="submit" value="Crear Sala" name="action">
 
     </form>
 </body>

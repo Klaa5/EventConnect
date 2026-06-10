@@ -34,7 +34,7 @@ include "../objetos/sala.php";
                 $instruccion1->execute();
 
                 $fila = $instruccion1->get_result()->fetch_assoc();
-                $datosSala = new Sala($fila["Id_sala"], $fila["Titulo"], $fila["Descripcion"], $fila["Modalidad"], $fila["nickname"], $fila["Ubicacion"], $fila["Fecha"], $fila["Estado"]);
+                $datosSala = new Sala($fila["Id_sala"], $fila["Titulo"], $fila["Descripcion"], $fila["Modalidad"], $fila["nicknameCreador"], $fila["Ubicacion"], $fila["Fecha"], $fila["Estado"]);
                 
             }
             

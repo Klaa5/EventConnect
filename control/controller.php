@@ -1,9 +1,8 @@
 <?php
     session_start();
-    include "../database/conexion.php";
-    include "../objetos/usuario.php";
-    include "../database/accesoBD/salaBD.php";
-    include "../database/accesoBD/usuarioBD.php";
+  
+    include "../control/accountManager.php";
+    include "../control/salaManager.php";
 
     //____________________________________________________________________________________
         //Ubicaciones en archivo:
