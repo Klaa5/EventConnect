@@ -46,9 +46,9 @@
                 //para leer hay que usar esto:
                 // password_verify("Constasenia iterada", $passwordSEC);
             $passwordSEC = password_hash($newUser->getPassword(), PASSWORD_BCRYPT);
-
+            $verify = false;
             $consulta = $conexion->prepare("INSERT INTO Usuario (nickname, password, email, edad, link, verifiedUser, nombre, apellido) values (?, ?, ?, ?, ?, ?, ?, ?)");
-            $consulta->bind_param("sssisiss", $newUser->getNickName(), $passwordSEC, $newUser->getEmail(), $newUser->getEdad(), $newUser->getLink(), false, $newUser->getNombre(), $newUser->getApellido());
+            $consulta->bind_param("sssisiss", $newUser->getNickName(), $passwordSEC, $newUser->getEmail(), $newUser->getEdad(), $newUser->getLink(), $verify, $newUser->getNombre(), $newUser->getApellido());
             $consulta->execute();
 
         }
