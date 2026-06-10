@@ -5,9 +5,6 @@
     include "../database/accesoBD/salaBD.php";
     include "../database/accesoBD/usuarioBD.php";
 
-    $conexion = new Conexion();
-    $conexion = $conexion->iniciarDB();
-
     //____________________________________________________________________________________
         //Ubicaciones en archivo:
 
@@ -30,7 +27,7 @@
         {
             $accountManager = new accountManager();
 
-            if($accountManager->buscarCuenta($_POST['nickName'], $_POST['password'], $conexion, 0))
+            if($accountManager->buscarCuenta($_POST['nickName'], $_POST['password'], 0))
             {
                 $_SESSION['nickName'] = $_POST['nickName']; //Variable seteada.
                 header("Location: ../paginas/paginaPrincipal.php");
@@ -56,7 +53,7 @@
         $accountManager = new accountManager();    
 
         //verifico que no deje vacio y que esa cuenta no exista.
-        if(!empty($_POST["nickNameReg"]) && !empty($_POST["passwordReg"]) && !$accountManager->buscarCuenta($_POST['nickNameReg'], "", $conexion, 1))
+        if(!empty($_POST["nickNameReg"]) && !empty($_POST["passwordReg"]) && !$accountManager->buscarCuenta($_POST['nickNameReg'], "", 1))
         {
             $usuario = new Usuario($_POST['nickNameReg'], $_POST['passwordReg'], $_POST['nombreUser'], $_POST['apellidoUser'], $_POST['emailUser'], $_POST['edadUser'], null, false);
             

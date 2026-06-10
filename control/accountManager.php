@@ -15,9 +15,9 @@
             $this->accesoUserBD = new UsuarioBD();
         }
 
-        public function buscarCuenta($nickName, $password, $conexion, $tipoBusqueda)
+        public function buscarCuenta($nickName, $password, $tipoBusqueda)
         {
-            return $this->accesoUserBD->buscarCuenta($nickName, $password, $conexion, $tipoBusqueda);
+            return $this->accesoUserBD->buscarCuenta($nickName, $password, $this->conexion, $tipoBusqueda);
         }
 
         public function registrarUser($usuario)
