@@ -16,7 +16,7 @@ session_start();
     <link rel="icon" type="image/png" href="../assets/EventConnect.png">
 </head>
 <body style="background-color: lightblue;">
-    <form action="../control/crearSalaServer.php" method="post">
+    <form action="../control/controller.php" method="post">
 <h2>EventConnect - Crear nueva sala</h2><br><hr><br>
     <p>Titulo de la sala:</p>
     <input type="text" name="titulo" id="titulo"><br>

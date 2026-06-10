@@ -20,9 +20,9 @@ session_start();
 </head>
 <body style="background-color: lightblue;">
     <?php
-        include "../control/salaManager.php";
-        $salaManager = new SalaManager($_POST['idSala']);
-        $sala = $salaManager->obtenerSala($_POST['idSala']);      
+        include "../control/salaContentManager.php";
+        $salaContentManager = new SalaContentManager($_POST['idSala']);
+        $sala = $salaContentManager->obtenerSala($_POST['idSala']);      
     ?>
 
     <h2>EventConnect - Visor de Sala</h2>
