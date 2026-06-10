@@ -21,8 +21,25 @@ session_start();
 <body style="background-color: lightblue;">
     <?php
         include "../control/salaContentManager.php";
-        $salaContentManager = new SalaContentManager($_POST['idSala']);
-        $sala = $salaContentManager->obtenerSala($_POST['idSala']);      
+
+        if(!isset($_GET['idSala']))
+        {
+            header("Location: paginaPrincipal.php");
+            exit();
+        }
+
+        if(!isset($_GET['action']))
+        {
+            $_GET['action'] = "";   //Esto es para evitar los errores de variable
+        }
+
+        $salaContentManager = new SalaContentManager($_GET['idSala']);
+        $sala = $salaContentManager->obtenerSala($_GET['idSala']);  
+        
+        if($_GET['action'] == 'error')
+        {
+            echo "<p style='color:red;'>Error al unirse a la sala. Intente nuevamente.</p>";
+        }
     ?>
 
     <h2>EventConnect - Visor de Sala</h2>
@@ -30,6 +47,20 @@ session_start();
     <hr>
     <h3>Nombre Sala: <?php echo $sala->getTitulo(); ?></h3>
     <h4>Modalidad: <?php echo $sala->getModalidad(); ?></h4>
+    <hr>
+
+    <?php
+        //Siempre y cuando el user no sea el creador o que no este dentro de los participantes.
+        if($_SESSION['nickName'] != $sala->getNickNameCreador() && !in_array($_SESSION['nickName'], $sala->getParticipantes()))
+        {?>
+            <form action="../control/controller.php" method="POST">
+                <input type="hidden" name="idSala" value="<?php echo $sala->getIdSala(); ?>">
+                <button type="submit" name="action" value="Unirse">Unirse</button>
+            </form>
+        <?php
+        }
+    ?>
+
     <hr>
     <p>Descripción: <?php echo $sala->getDescripcion(); ?></p>
     <hr>

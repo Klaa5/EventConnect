@@ -30,10 +30,18 @@ session_start();
 <hr>
 <h4>Crear Cuenta  </h4> 
 <form action="../control/controller.php" method="post">
-    <p>Ingrese Nombre de Usuario</p>
+    <p>Ingrese Nickname</p>
     <input type="text" name="nickNameReg" id="nickNameReg">
     <p>Ingrese Contraseña</p>
     <input type="password" name="passwordReg" id="passwordReg">
+    <p>Ingrese Nombre</p>
+    <input type="text" name="nombreUser" id="nombreUser">
+    <p>Ingrese Apellido</p>
+    <input type="text" name="apellidoUser" id="apellidoUser">
+    <p>Ingrese Email</p>
+    <input type="email" name="emailUser" id="emailUser">
+    <p>Ingrese Edad</p>
+    <input type="number" name="edadUser" id="edadUser">
     <input type="submit" value="Registrarse" name="action">
 </form>
 <br><br>

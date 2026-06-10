@@ -24,31 +24,21 @@
                 if($fila['Estado'] != "FINALIZADA" && $fila['Estado'] != "EN_CURSO")
                 {
                     echo "
-                    <form action='../paginas/visorSala.php' method='POST' class='sala-form'>
+<a href='../paginas/visorSala.php?idSala=".$fila['Id_sala']."' class='sala-card'>
 
-                        <input
-                            type='hidden'
-                            name='idSala'
-                            value='".$fila['Id_sala']."'
-                        >
+    <div class='sala-titulo'>
+        ".$fila['Titulo']."
+    </div>
 
-                        <button type='submit' class='sala-card'>
+    <div class='sala-info'>
+        Modalidad: ".$fila['Modalidad']."
+    </div>
 
-                            <div class='sala-titulo'>
-                                ".$fila['Titulo']."
-                            </div>
+    <div class='sala-info'>
+        Estado: ".$fila['Estado']."
+    </div>
 
-                            <div class='sala-info'>
-                                Modalidad: ".$fila['Modalidad']."
-                            </div>
-
-                            <div class='sala-info'>
-                                Estado: ".$fila['Estado']."
-                            </div>
-
-                        </button>
-
-                    </form>";
+</a>";
                 }
             }
 

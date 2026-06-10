@@ -3,6 +3,7 @@
   
     include "../control/accountManager.php";
     include "../control/salaManager.php";
+    include "../control/salaContentManager.php";
 
     //____________________________________________________________________________________
         //Ubicaciones en archivo:
@@ -122,7 +123,21 @@
     //_______________DENTRO SALA___________________
 
 
-
+    if($_POST["action"] == "Unirse") 
+    {
+        $salaContentManager = new SalaContentManager($_POST['idSala']);
+        
+        if($salaContentManager->agregarParticipante($_SESSION['nickName'], $_POST['idSala']))
+        {//Si logra unirse
+            header("Location: ../paginas/visorSala.php" . "?idSala=" . $_POST['idSala']);
+            exit();
+        }
+        else
+        {//Si hay error
+            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala'] . "&action=error");
+            exit();
+        }
+    }
 
 
 
