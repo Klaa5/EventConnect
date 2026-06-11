@@ -22,6 +22,14 @@ session_start();
     <form action="crearSala.php">
         <button type="submit">Nueva sala</button>
     </form>
+    <form action="./userProfile.php" method="get">
+        <input type="hidden" name="nickName" value="<?php echo $_SESSION['nickName']; ?>">
+        <input type="submit" value="Mi Perfil">
+    </form>
+    <form action="./listadoSalas.php" method="get">
+        <input type="hidden" name="nickName" value="<?php echo $_SESSION['nickName']; ?>">
+        <input type="submit" value="Mis Salas">
+    </form>
     <form action="../control/controller.php" method="post">
         <input type="submit" value="Cerrar Sesión" name="action">
     </form>
