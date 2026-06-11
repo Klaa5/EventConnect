@@ -40,6 +40,14 @@ session_start();
         {
             echo "<p style='color:red;'>Error al unirse a la sala. Intente nuevamente.</p>";
         }
+
+        //Esto para evitar accesos ilegales cuando la sala esta finalizada.
+        if($sala->getEstado() != "EN_PREPARACION"   && !in_array($_SESSION['nickName'], $sala->getParticipantes()) && $_SESSION['nickName'] != $sala->getNickNameCreador())
+        {
+            header("Location: paginaPrincipal.php");
+            exit();
+        }
+        
     ?>
 
     <h2>EventConnect - Visor de Sala</h2>
