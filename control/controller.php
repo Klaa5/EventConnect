@@ -4,6 +4,7 @@
     include_once "../control/salaManager.php";
     include_once "../control/salaContentManager.php";
     include_once "../database/accesoBD/salaBD.php";
+    date_default_timezone_set("America/Montevideo");
 
     //____________________________________________________________________________________
         //Ubicaciones en archivo:
@@ -144,6 +145,24 @@
         $salaContentManager = new SalaContentManager($_POST['idSala']);
         
         if($salaContentManager->eliminarParticipante($_POST['nickName'], $_POST['idSala']))
+        {
+            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala']);
+            exit();
+        }
+        else
+        {
+            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala'] . "&action=error");
+            exit();
+        }
+    }
+
+    if($_POST["action"] == "Enviar Mensaje")
+    {
+        $salaContentManager = new SalaContentManager($_POST['idSala']);
+        
+        $datosChat = new Chat(null, $_POST['idSala'], $_SESSION['nickName'], $_POST['mensaje'], date("Y-m-d H:i:s"));
+
+        if($salaContentManager->agregarMensajeChat($datosChat))
         {
             header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala']);
             exit();
