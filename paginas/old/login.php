@@ -13,11 +13,11 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventConnect - Login</title>
-    <link rel="icon" type="image/png" href="../../assets/EventConnect.png">
+    <link rel="icon" type="image/png" href="../assets/EventConnect.png">
 </head>
 <body style="background-color: lightblue;">
 <h4>Iniciar Sesion</h4>
-<form action="../../control/controller.php" method="post">
+<form action="../control/controller.php" method="post">
 
     <p>Ingrese Usuario</p>
     <input type="text" name="nickName" id="nickName">
@@ -29,7 +29,7 @@ session_start();
 
 <hr>
 <h4>Crear Cuenta  </h4> 
-<form action="../../control/controller.php" method="post">
+<form action="../control/controller.php" method="post">
     <p>Ingrese Nickname</p>
     <input type="text" name="nickNameReg" id="nickNameReg">
     <p>Ingrese Contraseña</p>
