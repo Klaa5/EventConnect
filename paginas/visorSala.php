@@ -20,7 +20,7 @@ session_start();
 </head>
 <body style="background-color: lightblue;">
     <?php
-        include "../control/salaContentManager.php";
+        include_once "../control/salaContentManager.php";
 
         if(!isset($_GET['idSala']))
         {
@@ -67,6 +67,7 @@ session_start();
     <p>Participantes:</p>
     <br>
     <?php
+        echo "<p>" . $sala->getNickNameCreador() . " (Creador)</p>";
         foreach($sala->getParticipantes() as $participante)
         {
             echo "<p>" . $participante . "</p>";

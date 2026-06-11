@@ -1,9 +1,10 @@
 <?php
     session_start();
   
-    include "../control/accountManager.php";
-    include "../control/salaManager.php";
-    include "../control/salaContentManager.php";
+    include_once "../control/accountManager.php";
+    include_once "../control/salaManager.php";
+    include_once "../control/salaContentManager.php";
+    include_once "../database/accesoBD/salaBD.php";
 
     //____________________________________________________________________________________
         //Ubicaciones en archivo:
