@@ -89,7 +89,7 @@ session_start();
         echo "<p>" . $sala->getNickNameCreador() . " (Creador)</p>";
         foreach($sala->getParticipantes() as $participante)
         {
-            echo "<span>" . $participante . "</span>";
+            echo "<span>" . $participante . "</span> <br> <br>";
 
             if($_SESSION['nickName'] == $sala->getNickNameCreador())
             {
@@ -102,6 +102,7 @@ session_start();
                     </button>
                 </form>
                 <br>
+                
                 <?php
             }
         }
@@ -126,13 +127,13 @@ session_start();
                     <input
                         type="hidden"
                         name="idSala"
-                        value="<?php echo $sala->getIdSala(); ?>"
+                        value="' . $sala->getIdSala() . '"
                     >
 
                     <input
                         type="text"
                         name="mensaje"
-                        maxlength="500"
+                        maxlength="100"
                         placeholder="Escribe un mensaje..."
                         required
                     >
