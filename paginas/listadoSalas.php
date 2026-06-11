@@ -20,11 +20,12 @@ session_start();
     <form action="./paginaPrincipal.php" method="post">
         <input type="submit" value="Volver a pagina principal">
     </form>
-
+    <br>
+    <hr>
     <?php
 
         include_once "../control/salaManager.php";
-        
+
         $salaManager = new SalaManager($_SESSION['nickName']);
 
         $salasUser = $salaManager->obtenerSalasUsuario();
@@ -32,13 +33,14 @@ session_start();
         foreach($salasUser as $sala)
         {
              echo "
-            <div style='border:1px solid #000; padding:12px; margin:10px; width:320px; background:#e9e9e9;'>
+             <a href='../paginas/visorSala.php?idSala=" . $sala->getIdSala() . "' style='text-decoration:none; color:inherit;'>
+            <div style='padding:12px; margin:10px; width:300px;'>
                 <h3 style='margin:0 0 5px 0;'>" . $sala->getTitulo() . "</h3>
-                <span>Fecha: " .
+                <span>Fecha de inicio: " .
                 date("d/m/Y H:i", strtotime($sala->getFechaHora())) .
                 "</span>
             </div>
-            ";
+            </a>";
 
         }
 
