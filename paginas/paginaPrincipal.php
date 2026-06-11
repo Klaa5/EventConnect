@@ -29,9 +29,9 @@ session_start();
     <hr>
     <h3>Salas disponibles:</h3>
     <?php
-        include "../control/paginaPrincipal.php";
-        $paginaPrincipal = new PaginaPrincipal();
-        $paginaPrincipal->mostrarSalas();
+        include "../control/homeManager.php";
+        $homeManager = new HomeManager();
+        $homeManager->mostrarSalas();
     ?>
 
 
