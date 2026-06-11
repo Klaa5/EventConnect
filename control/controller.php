@@ -1,23 +1,9 @@
 <?php
     session_start();
-    var_dump($_SESSION);
     include_once "../control/accountManager.php";
     include_once "../control/salaManager.php";
     include_once "../control/salaContentManager.php";
     include_once "../database/accesoBD/salaBD.php";
-
-
-    function compatibilityAdvisor()
-    {
-        if($_SESSION['oldHtml'] == true)  
-        {
-            return "/old";
-        }
-        else
-        {
-            return "";  
-        }
-    }
 
     //____________________________________________________________________________________
         //Ubicaciones en archivo:
@@ -44,31 +30,18 @@
             if($accountManager->buscarCuenta($_POST['nickName'], $_POST['password'], 0))
             {
                 $_SESSION['nickName'] = $_POST['nickName']; //Variable seteada.
-                header("Location: ../paginas" . compatibilityAdvisor() . "/paginaPrincipal.php");
+                header("Location: ../paginas/paginaPrincipal.php");
                 exit(); 
             }
             else
             {
-                header("Location: ../paginas" . compatibilityAdvisor() . "/login.php");
+                header("Location: ../paginas/login.php");
                 exit();
             }
         }
         else
         {
-
-            if($_POST['nickName'] == "debugmode" )  //ESTO ES SOLO PARA ACCEDER AL MODO BASICO HTML
-            {
-                if($_SESSION['oldHtml'] == false)
-                {  
-                    $_SESSION['oldHtml'] = true;
-                }
-                else
-                {
-                    $_SESSION['oldHtml'] = false;
-                }
-            }
-
-            header("Location: ../paginas" . compatibilityAdvisor() . "/login.php");
+            header("Location: ../paginas/login.php");
             exit();
         }    
     }
@@ -86,20 +59,20 @@
             
             if($accountManager->registrarUser($usuario))
             {
-                header("Location: ../paginas" . compatibilityAdvisor() . "/login.php");
+                header("Location: ../paginas/login.php");
                 exit();
             }
             else
             {
                 //PENDIENTE MANEJAR ERROR DE REGISTRO.
-                header("Location: ../paginas" . compatibilityAdvisor() . "/login.php");
+                header("Location: ../paginas/login.php");
                 exit();
             }
 
         }
         else
         {
-            header("Location: ../paginas" . compatibilityAdvisor() . "/login.php");
+            header("Location: ../paginas/login.php");
             exit();
         }
     }
@@ -109,7 +82,7 @@
     {
         session_unset();
         session_destroy();
-        header("Location: ../paginas" . compatibilityAdvisor() . "/login.php");
+        header("Location: ../paginas/login.php");
         exit();
     }
 
@@ -127,20 +100,20 @@
             if($salaManager->crearSala($_POST))
             {
                 //PENDIENTE VER COMO DAR UN MENSAJE DE SUCCESS
-                header("Location: ../paginas" . compatibilityAdvisor() . "/paginaPrincipal.php"); //redirige a la pagina principal si todo sale bien
+                header("Location: ../paginas/paginaPrincipal.php"); //redirige a la pagina principal si todo sale bien
                 exit();
             }
             else
             {
                 //PENDIENTE VER COMO DAR MENSAJE DE ERROR  
-                header("Location: ../paginas" . compatibilityAdvisor() . "/crearSala.php");   //vuelve a la pagina de creacion a reintentar.
+                header("Location: ../paginas/crearSala.php");   //vuelve a la pagina de creacion a reintentar.
                 exit();
             }
 
         }
         else
         {
-            header("Location: ../paginas" . compatibilityAdvisor() . "/login.php");
+            header("Location: ../paginas/login.php");
             exit();
         }
        
@@ -156,12 +129,12 @@
         
         if($salaContentManager->agregarParticipante($_SESSION['nickName'], $_POST['idSala']))
         {//Si logra unirse
-            header("Location: ../paginas" . compatibilityAdvisor() . "/visorSala.php" . "?idSala=" . $_POST['idSala']);
+            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala']);
             exit();
         }
         else
         {//Si hay error
-            header("Location: ../paginas" . compatibilityAdvisor() . "  /visorSala.php?idSala=" . $_POST['idSala'] . "&action=error");
+            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala'] . "&action=error");
             exit();
         }
     }
