@@ -1,58 +1,136 @@
 <?php
 session_start();
 
-    if(!empty($_SESSION['nickName']))   
-    {
-        header("Location: paginaPrincipal.php");
-        exit();
-    }
+if(!empty($_SESSION['nickName']))
+{
+    header("Location: paginaPrincipal.php");
+    exit();
+}
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventConnect - Login</title>
+
     <link rel="icon" type="image/png" href="../assets/EventConnect.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="../assets/CSS/estilos.css" rel="stylesheet">
 </head>
-<body style="background-color: lightblue;">
-<h4>Iniciar Sesion</h4>
-<form action="../control/controller.php" method="post">
 
-    <p>Ingrese Usuario</p>
-    <input type="text" name="nickName" id="nickName">
-    <p>Ingrese Contraseña</p>
-    <input type="password" name="password" id="password">
-    <input type="submit" value="Iniciar Sesión" name="action">
+<body>
 
-</form>
+<div class="login-container">
 
-<hr>
-<h4>Crear Cuenta  </h4> 
-<form action="../control/controller.php" method="post">
-    <p>Ingrese Nickname</p>
-    <input type="text" name="nickNameReg" id="nickNameReg">
-    <p>Ingrese Contraseña</p>
-    <input type="password" name="passwordReg" id="passwordReg">
-    <p>Ingrese Nombre</p>
-    <input type="text" name="nombreUser" id="nombreUser">
-    <p>Ingrese Apellido</p>
-    <input type="text" name="apellidoUser" id="apellidoUser">
-    <p>Ingrese Email</p>
-    <input type="email" name="emailUser" id="emailUser">
-    <p>Ingrese Edad</p>
-    <input type="number" name="edadUser" id="edadUser">
-    <input type="submit" value="Registrarse" name="action">
-</form>
-<br><br>
+    <div class="glass-card login-card">
 
-<span>Problemas al registrarse? Haz click </span>
-<a href="https://www.youtube.com/watch?v=Hg469wSrZhI">aqui</a>
+        <div class="login-header">
 
-<br><br><br><br><br>
+            <img src="../assets/EventConnect.png"
+                 alt="EventConnect"
+                 class="logo-login">
 
-<p><font size="1">© 1996 EventConnect - MATEX inc</font></p>
+            <h1>EventConnect</h1>
 
+            <p>Organiza y conecta eventos fácilmente</p>
+
+        </div>
+
+        <div class="login-grid">
+
+            <div class="login-box">
+
+                <h2>Iniciar Sesión</h2>
+
+                <form action="../control/sessionManager.php" method="post">
+
+                    <label>Usuario</label>
+
+                    <input
+                        type="text"
+                        name="nickName"
+                        class="input-eventconnect"
+                        required>
+
+                    <label>Contraseña</label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        class="input-eventconnect"
+                        required>
+
+                    <button
+                        type="submit"
+                        name="action"
+                        value="Iniciar Sesión"
+                        class="btn-eventconnect btn-login">
+
+                        Iniciar Sesión
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="login-box">
+
+                <h2>Crear Cuenta</h2>
+
+                <form action="../control/sessionManager.php" method="post">
+
+                    <label>Usuario</label>
+
+                    <input
+                        type="text"
+                        name="nickNameReg"
+                        class="input-eventconnect"
+                        required>
+
+                    <label>Contraseña</label>
+
+                    <input
+                        type="password"
+                        name="passwordReg"
+                        class="input-eventconnect"
+                        required>
+
+                    <button
+                        type="submit"
+                        name="action"
+                        value="Registrarse"
+                        class="btn-eventconnect btn-register">
+
+                        Registrarse
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="help-section">
+
+            <a href="https://www.youtube.com/watch?v=Hg469wSrZhI" target="_blank">
+                ¿Problemas al registrarte?
+            </a>
+
+        </div>
+
+        <div class="footer-eventconnect">
+            © 2026 EventConnect
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>

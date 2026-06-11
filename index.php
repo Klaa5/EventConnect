@@ -1,5 +1,7 @@
 <?php
     session_start();
+    $_SESSION['oldHtml'] = true; //Version old para debug
+    
     if(!empty($_SESSION['nickName']))   //Al ingresar verifico si el usuario se ha logueado.
     {
         header("Location: paginas/paginaPrincipal.php");
