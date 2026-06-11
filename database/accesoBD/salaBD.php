@@ -66,6 +66,28 @@ include_once "../objetos/sala.php";
             }
         }
 
+        public function obtenerSalasUsuario($conexion, $nickName)
+        {
+            $consulta = "SELECT Sala.* FROM Sala LEFT JOIN Participa ON Sala.Id_sala = Participa.Id_sala LEFT JOIN Usuario ON Participa.nickname = Usuario.nickname WHERE Sala.nicknameCreador = ? OR Participa.nickname = ?";
+            $instruccion = $conexion->prepare($consulta);
+            $instruccion->bind_param("ss", $nickName, $nickName);
+            $instruccion->execute();
+            $resultado = $instruccion->get_result();
+
+            $salas = [];
+
+            if($resultado->num_rows > 0)
+            {
+                while($salaIterada = $resultado->fetch_assoc())
+                {
+                    $salas[] = new Sala($salaIterada['Id_sala'], $salaIterada['Titulo'], $salaIterada['Descripcion'], $salaIterada['Modalidad'], $salaIterada['nicknameCreador'], $salaIterada['Ubicacion'], $salaIterada['Fecha'], $salaIterada['Estado']);
+                }
+            }
+
+            return $salas;
+
+        }
+
     }
 
 
