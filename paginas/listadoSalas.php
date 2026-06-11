@@ -32,14 +32,25 @@ session_start();
 
         foreach($salasUser as $sala)
         {
+
+            if($sala->getModalidad() == "virtual")
+            {
+                $mod = "<span style='color:green'>Evento Online/Virtual </span><br>";
+            }
+            else
+            {
+                $mod = "";
+            }  
+
              echo "
              <a href='../paginas/visorSala.php?idSala=" . $sala->getIdSala() . "' style='text-decoration:none; color:inherit;'>
-            <div style='padding:12px; margin:10px; width:300px;'>
-                <h3 style='margin:0 0 5px 0;'>" . $sala->getTitulo() . "</h3>
-                <span>Fecha de inicio: " .
-                date("d/m/Y H:i", strtotime($sala->getFechaHora())) .
-                "</span>
-            </div>
+            
+                 <div style='padding:12px; margin:10px; width:300px;'>
+                    <h3 style='margin:0 0 5px 0;'>" . $sala->getTitulo() . "</h3>
+                    <span>Fecha de inicio: " . date("d/m/Y H:i", strtotime($sala->getFechaHora())) . "</span>
+                    $mod 
+                </div>
+                
             </a>";
 
         }
