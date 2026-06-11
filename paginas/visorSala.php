@@ -6,8 +6,6 @@ session_start();
         header("Location: login.php");
         exit();
     }
-    
-
 
 ?>
 <!DOCTYPE html>
@@ -38,7 +36,7 @@ session_start();
         
         if($_GET['action'] == 'error')
         {
-            echo "<p style='color:red;'>Error al unirse a la sala. Intente nuevamente.</p>";
+            echo "<p style='color:red'>Error inesperado. Intente nuevamente.</p>";
         }
 
         //Esto para evitar accesos ilegales cuando la sala esta finalizada.
@@ -73,12 +71,25 @@ session_start();
     <p>Descripción: <?php echo $sala->getDescripcion(); ?></p>
     <hr>
     <p>Participantes:</p>
-    <br>
     <?php
         echo "<p>" . $sala->getNickNameCreador() . " (Creador)</p>";
         foreach($sala->getParticipantes() as $participante)
         {
-            echo "<p>" . $participante . "</p>";
+            echo "<span>" . $participante . "</span>";
+
+            if($_SESSION['nickName'] == $sala->getNickNameCreador())
+            {
+                ?>
+                <form action="../control/controller.php" method="POST" style="display:inline;">
+                    <input type="hidden" name="idSala" value="<?php echo $sala->getIdSala(); ?>">
+                    <input type="hidden" name="nickName" value="<?php echo $participante; ?>">
+                    <button type="submit" name="action" value="Eliminar Participante">
+                        <span style='color:red'> Eliminar Participante </span>
+                    </button>
+                </form>
+                <br>
+                <?php
+            }
         }
     ?>
 
