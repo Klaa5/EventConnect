@@ -62,7 +62,7 @@ if(!empty($_SESSION['nickName']))
                         type="password"
                         name="password"
                         class="input-eventconnect"
-                        >
+                        required>
 
                     <button
                         type="submit"

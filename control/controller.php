@@ -37,7 +37,7 @@
     if($_POST["action"] == "Iniciar Sesión")
     {
         //Asocio el inicio de sesion a la variable session si es correcto.
-        if(!empty($_POST["nickName"]) && !empty($_POST["password"]))
+        if(!empty($_POST["nickName"]) && !empty(trim($_POST["password"])))
         {
             $accountManager = new accountManager();
 
