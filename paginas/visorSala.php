@@ -51,11 +51,11 @@ session_start();
     <h2>EventConnect - Visor de Sala</h2>
     <br>
     <hr>
-    
+    <br>
     <form action="./paginaPrincipal.php" method="post">
         <input type="submit" value="Volver a pagina principal">
     </form>
-    
+    <br><hr>
     <h3>Nombre Sala: <?php echo $sala->getTitulo(); ?></h3>
     <h4>Modalidad: <?php echo $sala->getModalidad(); ?></h4>
   
