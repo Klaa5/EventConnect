@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 04-06-2026 a las 00:38:03
+-- Tiempo de generación: 11-06-2026 a las 02:39:54
 -- Versión del servidor: 10.11.14-MariaDB-0+deb12u2
 -- Versión de PHP: 8.2.30
 
@@ -28,12 +28,25 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Chat` (
-  `id_chat` int(11) NOT NULL,
+  `id_chat` int(11) NOT NULL COMMENT 'es auto increment',
   `Id_sala` int(11) NOT NULL,
   `nickname` varchar(100) NOT NULL,
   `Contenido` varchar(250) NOT NULL,
   `fecha` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `Chat`
+--
+
+INSERT INTO `Chat` (`id_chat`, `Id_sala`, `nickname`, `Contenido`, `fecha`) VALUES
+(1, 4, '1', 'hola', '2026-06-10 23:28:54'),
+(2, 4, '1', 'que bien', '2026-06-10 23:29:04'),
+(3, 4, '1', 'ayuda', '2026-06-10 23:29:18'),
+(4, 4, '1', 'ok', '2026-06-10 23:37:02'),
+(5, 4, '2', 'Que dices?', '2026-06-10 23:37:24'),
+(6, 4, '2', 'Bién', '2026-06-10 23:37:31'),
+(7, 4, '2', 'No pueden con el AWP', '2026-06-10 23:37:46');
 
 -- --------------------------------------------------------
 
@@ -46,6 +59,16 @@ CREATE TABLE `Participa` (
   `nickname` varchar(100) NOT NULL,
   `Id_sala` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `Participa`
+--
+
+INSERT INTO `Participa` (`id_participacion`, `nickname`, `Id_sala`) VALUES
+(1, '2', 4),
+(2, '2', 1),
+(3, '2', 7),
+(4, '1', 6);
 
 -- --------------------------------------------------------
 
@@ -85,10 +108,11 @@ CREATE TABLE `Sala` (
 INSERT INTO `Sala` (`Id_sala`, `Titulo`, `Descripcion`, `Modalidad`, `Ubicacion`, `Fecha`, `nicknameCreador`, `Estado`) VALUES
 (1, 'ALGO', 'PRUEBA1', 'virtual', 'MI PC', '2026-05-12 12:30:00', '1', 'EN_PREPARACION'),
 (2, 'ALGO2', 'PRUEBA2', 'virtual', 'MI PC2', '2026-05-15 12:30:00', '1', 'EN_PREPARACION'),
-(3, 'ALGO3', 'PRUEBA3', 'virtual', 'MI PC3', '2026-05-16 12:30:00', '1', 'EN_PREPARACION'),
+(3, 'ALGO3', 'PRUEBA3', 'virtual', 'MI PC3', '2026-05-16 12:30:00', '1', 'FINALIZADA'),
 (4, 'Counter Strike 1.6 ', 'Jueguito clasico', 'Virtual', NULL, '2026-05-15 12:22:00', '1', 'EN_PREPARACION'),
 (5, 'GTA VI', 'Gameboy advance only', 'En Persona', 'Casa de stiguar', '2026-05-27 05:06:00', '1', 'EN_PREPARACION'),
-(6, 'lol', '12', 'En Persona', '123', '2026-05-31 12:22:00', 'Matero', 'EN_PREPARACION');
+(6, 'lol', '12', 'En Persona', '123', '2026-05-31 12:22:00', 'Matero', 'EN_PREPARACION'),
+(7, 'CS Source', 'old', 'Virtual', NULL, '2152-12-12 12:04:00', '1', 'EN_PREPARACION');
 
 -- --------------------------------------------------------
 
@@ -113,6 +137,7 @@ CREATE TABLE `Usuario` (
 
 INSERT INTO `Usuario` (`nickname`, `password`, `email`, `edad`, `Link`, `verifiedUser`, `nombre`, `apellido`) VALUES
 ('1', '$2y$10$gMjNyg3ij9aVR3kLowOhd.6nbMabes5d0Hze75DQXtS2PyDVsv6vO', '', 0, NULL, 0, '', ''),
+('2', '$2y$10$s5VguCmON72v2dtI.wTqtuPiN/j6NMenYp.58/dj8rSPc3aWDYyzW', '2@gmail.com', 12, 'Sin descripcion', 0, '2', '2'),
 ('Matero', '$2y$10$me7CYsI4Ef47vTggMJz8uu.R5tTfaxndUMobu3AJhwnhzGw5HMa9C', '', 0, NULL, 0, '', '');
 
 --
@@ -162,16 +187,22 @@ ALTER TABLE `Usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `Chat`
+--
+ALTER TABLE `Chat`
+  MODIFY `id_chat` int(11) NOT NULL AUTO_INCREMENT COMMENT 'es auto increment', AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT de la tabla `Participa`
 --
 ALTER TABLE `Participa`
-  MODIFY `id_participacion` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Es auto increment';
+  MODIFY `id_participacion` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Es auto increment', AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `Sala`
 --
 ALTER TABLE `Sala`
-  MODIFY `Id_sala` int(11) NOT NULL AUTO_INCREMENT COMMENT 'No se setea, es Auto Increment!', AUTO_INCREMENT=7;
+  MODIFY `Id_sala` int(11) NOT NULL AUTO_INCREMENT COMMENT 'No se setea, es Auto Increment!', AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
