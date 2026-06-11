@@ -22,17 +22,17 @@
             return $sala;
         }
 
-        public function agregarParticipante($idUsuario, $idSala)
+        public function agregarParticipante($nickName, $idSala)
         {
             $accesoDBParticipacion = new participacionBD();
-            $resultado = $accesoDBParticipacion->agregarParticipante($idUsuario, $idSala, $this->conexion);
+            $resultado = $accesoDBParticipacion->agregarParticipante($nickName, $idSala, $this->conexion);
             return $resultado;
         } 
 
-        public function eliminarParticipante($idUsuario, $idSala)
+        public function eliminarParticipante($nickName, $idSala)
         {
             $accesoDBParticipacion = new participacionBD();
-            $resultado = $accesoDBParticipacion->eliminarParticipante($idUsuario, $idSala, $this->conexion);
+            $resultado = $accesoDBParticipacion->eliminarParticipante($nickName, $idSala, $this->conexion);
             return $resultado;
         }
 
