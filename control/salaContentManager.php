@@ -2,6 +2,7 @@
     include_once "../database/accesoBD/salaBD.php";
     include_once "../database/conexion.php";
     include_once "../database/accesoBD/participacionBD.php";
+    include_once "../database/accesoBD/chatBD.php";
 
     class SalaContentManager
     {
@@ -41,6 +42,18 @@
             $accesoDBParticipacion = new participacionBD();
             $resultado = $accesoDBParticipacion->listarParticipantes($idSala, $this->conexion);
             return $resultado;
+        }
+
+        public function obtenerChat($idSala)
+        {
+            $chatDB = new chatBD();
+            return $chatDB->obtenerChat($idSala, $this->conexion);
+        }
+
+        public function agregarMensajeChat($datosChat)
+        {
+            $chatDB = new chatBD();
+            return $chatDB->agregarMensaje($datosChat, $this->conexion);
         }
     }
 
