@@ -51,9 +51,14 @@ session_start();
     <h2>EventConnect - Visor de Sala</h2>
     <br>
     <hr>
+    
+    <form action="./paginaPrincipal.php" method="post">
+        <input type="submit" value="Volver a pagina principal">
+    </form>
+    
     <h3>Nombre Sala: <?php echo $sala->getTitulo(); ?></h3>
     <h4>Modalidad: <?php echo $sala->getModalidad(); ?></h4>
-    <hr>
+  
 
     <?php
         //Siempre y cuando el user no sea el creador o que no este dentro de los participantes.
