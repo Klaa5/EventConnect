@@ -57,7 +57,16 @@ session_start();
     </form>
     <br><hr>
     <h3>Nombre Sala: <?php echo $sala->getTitulo(); ?></h3>
-    <h4>Modalidad: <?php echo $sala->getModalidad(); ?></h4>
+    <h4>Fecha inicio evento: <?php echo date("d/m/Y H:i", strtotime($sala->getFechaHora())); ?></h4>
+    <h4> 
+        <?php
+            
+            if($sala->getModalidad() == 'virtual')
+            {
+                echo "<span style='color:green'>Online/Virtual </span><br>" ; 
+            }
+
+        ?></h4>
   
 
     <?php
@@ -98,35 +107,43 @@ session_start();
         }
     ?>
     <hr>
-    <p>Mensajes:</p>
-    <?php
-        $chat = $salaContentManager->obtenerChat($_GET['idSala']);
-        foreach($chat as $mensaje)
-        {
-            echo "<p><strong>" . $mensaje->getNicknameEmisor() . ":</strong> " . $mensaje->getContenido() . " <small><em> <" . date("d/m/Y H:i", strtotime($mensaje->getFechaHora())) . "</em>></small></   p>";
-        }
-    ?>
     
+    <?php
 
-    <form action="../control/controller.php" method="POST">
-        <input
-            type="hidden"
-            name="idSala"
-            value="<?php echo $sala->getIdSala(); ?>"
-        >
+        //Solo podra ver el chat si es participante o si es el creador de la sala.
+        if($_SESSION['nickName'] == $sala->getNickNameCreador() || in_array($_SESSION['nickName'], $sala->getParticipantes()))
+        {
+            echo '<p>Mensajes:</p>';
 
-        <input
-            type="text"
-            name="mensaje"
-            maxlength="500"
-            placeholder="Escribe un mensaje..."
-            required
-        >
+            $chat = $salaContentManager->obtenerChat($_GET['idSala']);
+            foreach($chat as $mensaje)
+            {
+                echo "<p><strong>" . $mensaje->getNicknameEmisor() . ":</strong> " . $mensaje->getContenido() . " <small><em> <" . date("d/m/Y H:i", strtotime($mensaje->getFechaHora())) . "</em>></small></   p>";
+            }
 
-        <button type="submit" name="action" value="Enviar Mensaje">
-            Enviar
-        </button>
-    </form>
+            echo 
+                '<form action="../control/controller.php" method="POST">
+                    <input
+                        type="hidden"
+                        name="idSala"
+                        value="<?php echo $sala->getIdSala(); ?>"
+                    >
+
+                    <input
+                        type="text"
+                        name="mensaje"
+                        maxlength="500"
+                        placeholder="Escribe un mensaje..."
+                        required
+                    >
+
+                    <button type="submit" name="action" value="Enviar Mensaje">
+                        Enviar
+                    </button>
+                </form>';
+        }
+
+    ?>
 
 </body>
 </html>
