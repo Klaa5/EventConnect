@@ -39,6 +39,12 @@
             }
         }
 
+        public function obtenerSalasUsuario()
+        {
+            $salaBD = new SalaBD;
+            return $salaBD->obtenerSalasUsuario($this->conexion, $this->nickname);
+        }
+
     }
 
 ?>
