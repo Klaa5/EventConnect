@@ -42,7 +42,7 @@ if(empty($_SESSION['nickName']))
             <strong><?php echo $_SESSION['nickName']; ?></strong>
         </div>
 
-        <form action="../control/sessionManager.php" method="post" class="logout-form">
+        <form action="../control/controller.php" method="post" class="logout-form">
             <button
                 type="submit"
                 name="action"

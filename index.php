@@ -1,16 +1,30 @@
 <?php
     session_start();
-    $_SESSION['oldHtml'] = true; //Version old para debug
-    
+
     if(!empty($_SESSION['nickName']))   //Al ingresar verifico si el usuario se ha logueado.
     {
-        header("Location: paginas/paginaPrincipal.php");
+        if($_SESSION['oldHtml'] == true)  
+        {
+            header("Location: paginas/old/paginaPrincipal.php");
+        }
+        else
+        {
+            header("Location: paginas/paginaPrincipal.php");
+        }
         exit();
     }
     else
     {
-        header("Location: paginas/login.php");
+        if($_SESSION['oldHtml'] == true)  
+        {
+            header("Location: paginas/old/login.php");
+        }
+        else
+        {
+            header("Location: paginas/login.php");
+        }
         exit();
+       
     }
     
 ?>

@@ -16,11 +16,11 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventConnect - Visor de Sala</title>
-    <link rel="icon" type="image/png" href="../assets/EventConnect.png">
+    <link rel="icon" type="image/png" href="../../assets/EventConnect.png">
 </head>
 <body style="background-color: lightblue;">
     <?php
-        include_once "../control/salaContentManager.php";
+        include_once "../../control/salaContentManager.php";
 
         if(!isset($_GET['idSala']))
         {
@@ -61,7 +61,7 @@ session_start();
         //Siempre y cuando el user no sea el creador o que no este dentro de los participantes.
         if($_SESSION['nickName'] != $sala->getNickNameCreador() && !in_array($_SESSION['nickName'], $sala->getParticipantes()))
         {?>
-            <form action="../control/controller.php" method="POST">
+            <form action="../../control/controller.php" method="POST">
                 <input type="hidden" name="idSala" value="<?php echo $sala->getIdSala(); ?>">
                 <button type="submit" name="action" value="Unirse">Unirse</button>
             </form>

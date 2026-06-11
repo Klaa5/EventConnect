@@ -1,6 +1,6 @@
 <?php
     session_start();
-  
+    var_dump($_SESSION);
     include_once "../control/accountManager.php";
     include_once "../control/salaManager.php";
     include_once "../control/salaContentManager.php";
@@ -55,6 +55,19 @@
         }
         else
         {
+
+            if($_POST['nickName'] == "debugmode" )  //ESTO ES SOLO PARA ACCEDER AL MODO BASICO HTML
+            {
+                if($_SESSION['oldHtml'] == false)
+                {  
+                    $_SESSION['oldHtml'] = true;
+                }
+                else
+                {
+                    $_SESSION['oldHtml'] = false;
+                }
+            }
+
             header("Location: ../paginas" . compatibilityAdvisor() . "/login.php");
             exit();
         }    

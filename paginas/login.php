@@ -46,7 +46,7 @@ if(!empty($_SESSION['nickName']))
 
                 <h2>Iniciar Sesión</h2>
 
-                <form action="../control/sessionManager.php" method="post">
+                <form action="../control/controller.php" method="post">
 
                     <label>Usuario</label>
 
@@ -62,7 +62,7 @@ if(!empty($_SESSION['nickName']))
                         type="password"
                         name="password"
                         class="input-eventconnect"
-                        required>
+                        >
 
                     <button
                         type="submit"
@@ -82,7 +82,7 @@ if(!empty($_SESSION['nickName']))
 
                 <h2>Crear Cuenta</h2>
 
-                <form action="../control/sessionManager.php" method="post">
+                <form action="../control/controller.php" method="post">
 
                     <label>Usuario</label>
 
