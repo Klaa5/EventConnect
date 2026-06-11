@@ -23,7 +23,7 @@
                 if($fila['Estado'] != "FINALIZADA" && $fila['Estado'] != "EN_CURSO")
                 {
                     echo "
-                        <a href='../paginas/old/visorSala.php?idSala=".$fila['Id_sala']."' class='sala-card'>
+                        <a href='../paginas/visorSala.php?idSala=".$fila['Id_sala']."' class='sala-card'>
 
                             <div class='sala-titulo'>
                                 ".$fila['Titulo']."
