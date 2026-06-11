@@ -159,7 +159,7 @@
     if($_POST["action"] == "Enviar Mensaje")
     {
         $salaContentManager = new SalaContentManager($_POST['idSala']);
-        
+         
         $datosChat = new Chat(null, $_POST['idSala'], $_SESSION['nickName'], $_POST['mensaje'], date("Y-m-d H:i:s"));
 
         if($salaContentManager->agregarMensajeChat($datosChat))
