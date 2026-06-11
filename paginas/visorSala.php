@@ -92,6 +92,36 @@ session_start();
             }
         }
     ?>
+    <hr>
+    <p>Mensajes:</p>
+    <?php
+        $chat = $salaContentManager->obtenerChat($_GET['idSala']);
+        foreach($chat as $mensaje)
+        {
+            echo "<p><strong>" . $mensaje->getNicknameEmisor() . ":</strong> " . $mensaje->getContenido() . " <small><em> <" . date("d/m/Y H:i", strtotime($mensaje->getFechaHora())) . "</em>></small></   p>";
+        }
+    ?>
+    
+
+    <form action="../control/controller.php" method="POST">
+        <input
+            type="hidden"
+            name="idSala"
+            value="<?php echo $sala->getIdSala(); ?>"
+        >
+
+        <input
+            type="text"
+            name="mensaje"
+            maxlength="500"
+            placeholder="Escribe un mensaje..."
+            required
+        >
+
+        <button type="submit" name="action" value="Enviar Mensaje">
+            Enviar
+        </button>
+    </form>
 
 </body>
 </html>
