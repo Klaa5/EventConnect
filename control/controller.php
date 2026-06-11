@@ -139,6 +139,21 @@
         }
     }
 
+    if($_POST["action"] == "Eliminar Participante")
+    {
+        $salaContentManager = new SalaContentManager($_POST['idSala']);
+        
+        if($salaContentManager->eliminarParticipante($_POST['nickName'], $_POST['idSala']))
+        {
+            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala']);
+            exit();
+        }
+        else
+        {
+            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala'] . "&action=error");
+            exit();
+        }
+    }
 
 
 ?>
