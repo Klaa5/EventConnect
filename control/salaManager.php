@@ -1,50 +1,50 @@
 <?php
-    include "../database/conexion.php";
-    include "../database/accesoBD/salaBD.php";
-    include "../database/accesoBD/participacionBD.php";
+    include_once "../database/conexion.php";
+    include_once "../objetos/usuario.php";
+    include_once "../database/accesoBD/salaBD.php";    
 
     class SalaManager
     {
         private $conexion;
-        private $idSala;
+        private $nickname;
 
-        public function __construct($idSala)
+        public function __construct($nickNameSession)
         {
             $this->conexion = new Conexion();
             $this->conexion = $this->conexion->iniciarDB();
-            $this->idSala = $idSala;
+            $this->nickname = $nickNameSession;
         }
 
-        public function obtenerSala($idSala)
+        public function crearSala($datosNewSala)
         {
-            $accesoDBSala = new salaBD();
-            $sala = $accesoDBSala->getSala($idSala, $this->conexion);
-            return $sala;
+            if(!empty($this->nickname))   //solo funcionaria si hay una sesion iniciada...
+            {
+        
+                $salaNueva = new Sala(null, $datosNewSala["titulo"], $datosNewSala["descripcion"], $datosNewSala["modalidad"], $this->nickname, $datosNewSala["ubicacion"], $datosNewSala["fechaHora"], "creando");
+                $salaBD = new salaBD();
+                
+                if($salaBD->registrarSala($this->conexion, $salaNueva))  //Se crea la sala.
+                {   
+                    return true;    //sala creada
+                }
+                else
+                {   
+                    return false;   //error al crear la sala
+                }
+        
+            }
+            else
+            {
+                return false;   //si no hay sesion iniciada, no se puede crear la sala.
+            }
         }
 
-        public function agregarParticipante($idUsuario, $idSala)
+        public function obtenerSalasUsuario()
         {
-            $accesoDBParticipacion = new participacionBD();
-            $resultado = $accesoDBParticipacion->agregarParticipante($idUsuario, $idSala, $this->conexion);
-            return $resultado;
-        } 
-
-        public function eliminarParticipante($idUsuario, $idSala)
-        {
-            $accesoDBParticipacion = new participacionBD();
-            $resultado = $accesoDBParticipacion->eliminarParticipante($idUsuario, $idSala, $this->conexion);
-            return $resultado;
+            $salaBD = new SalaBD;
+            return $salaBD->obtenerSalasUsuario($this->conexion, $this->nickname);
         }
 
-        public function listarParticipantes($idSala)
-        {
-            $accesoDBParticipacion = new participacionBD();
-            $resultado = $accesoDBParticipacion->listarParticipantes($idSala, $this->conexion);
-            return $resultado;
-        }
     }
-
-    
-
 
 ?>

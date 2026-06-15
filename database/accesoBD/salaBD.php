@@ -1,11 +1,11 @@
 <?php
-include "../objetos/sala.php";
+include_once "../objetos/sala.php";
 
     class salaBD
     {
         public function getSala($idSala, $conexion)
         {   
-            $consulta = "SELECT * FROM Sala NATURAL JOIN Participa NATURAL JOIN Usuario WHERE Id_sala = ?"; 
+            $consulta = "SELECT Sala.*, Participa.*, Usuario.nickname FROM Sala NATURAL JOIN Participa NATURAL JOIN Usuario WHERE Id_sala = ?"; 
             $instruccion = $conexion->prepare($consulta);
             $instruccion->bind_param("i", $idSala);
             $instruccion->execute();
@@ -17,7 +17,7 @@ include "../objetos/sala.php";
 
                 //Esto ya itera al usar la funcion de arriba, asi que cuando empiece el while empieza desde el segundo integrante!
                 //Agrego los datos de la sala y del primer integrante.
-                $datosSala = new Sala($primeraFila["Id_sala"], $primeraFila["Titulo"], $primeraFila["Descripcion"], $primeraFila["Modalidad"], $primeraFila["nickname"], $primeraFila["Ubicacion"], $primeraFila["Fecha"], $primeraFila["Estado"]);
+                $datosSala = new Sala($primeraFila["Id_sala"], $primeraFila["Titulo"], $primeraFila["Descripcion"], $primeraFila["Modalidad"], $primeraFila["nicknameCreador"], $primeraFila["Ubicacion"], $primeraFila["Fecha"], $primeraFila["Estado"]);
                 $datosSala->agregarParticipante($primeraFila['nickname']);  //Este es el primer participante, que casi se me pierde.
 
                 //Aca obtengo el nombre de cada participante.
@@ -34,7 +34,7 @@ include "../objetos/sala.php";
                 $instruccion1->execute();
 
                 $fila = $instruccion1->get_result()->fetch_assoc();
-                $datosSala = new Sala($fila["Id_sala"], $fila["Titulo"], $fila["Descripcion"], $fila["Modalidad"], $fila["nickname"], $fila["Ubicacion"], $fila["Fecha"], $fila["Estado"]);
+                $datosSala = new Sala($fila["Id_sala"], $fila["Titulo"], $fila["Descripcion"], $fila["Modalidad"], $fila["nicknameCreador"], $fila["Ubicacion"], $fila["Fecha"], $fila["Estado"]);
                 
             }
             
@@ -64,6 +64,28 @@ include "../objetos/sala.php";
             {
                 return false;
             }
+        }
+
+        public function obtenerSalasUsuario($conexion, $nickName)
+        {
+            $consulta = "SELECT Sala.* FROM Sala LEFT JOIN Participa ON Sala.Id_sala = Participa.Id_sala LEFT JOIN Usuario ON Participa.nickname = Usuario.nickname WHERE Sala.nicknameCreador = ? OR Participa.nickname = ?";
+            $instruccion = $conexion->prepare($consulta);
+            $instruccion->bind_param("ss", $nickName, $nickName);
+            $instruccion->execute();
+            $resultado = $instruccion->get_result();
+
+            $salas = [];
+
+            if($resultado->num_rows > 0)
+            {
+                while($salaIterada = $resultado->fetch_assoc())
+                {
+                    $salas[] = new Sala($salaIterada['Id_sala'], $salaIterada['Titulo'], $salaIterada['Descripcion'], $salaIterada['Modalidad'], $salaIterada['nicknameCreador'], $salaIterada['Ubicacion'], $salaIterada['Fecha'], $salaIterada['Estado']);
+                }
+            }
+
+            return $salas;
+
         }
 
     }

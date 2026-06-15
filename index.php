@@ -1,5 +1,6 @@
 <?php
     session_start();
+    
     if(!empty($_SESSION['nickName']))   //Al ingresar verifico si el usuario se ha logueado.
     {
         header("Location: paginas/paginaPrincipal.php");

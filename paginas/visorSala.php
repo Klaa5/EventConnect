@@ -1,130 +1,150 @@
-<?php
+<?php   
 session_start();
 
-if(empty($_SESSION['nickName']))
-{
-    header("Location: login.php");
-    exit();
-}
-?>
+    if(empty($_SESSION['nickName']))   
+    {
+        header("Location: login.php");
+        exit();
+    }
 
+?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventConnect - Visor de Sala</title>
-
     <link rel="icon" type="image/png" href="../assets/EventConnect.png">
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <link href="../assets/CSS/estilos.css" rel="stylesheet">
 </head>
+<body style="background-color: lightblue;">
+    <?php
+        include_once "../control/salaContentManager.php";
 
-<body>
+        if(!isset($_GET['idSala']))
+        {
+            header("Location: paginaPrincipal.php");
+            exit();
+        }
 
-<?php
-    include "../control/salaManager.php";
+        if(!isset($_GET['action']))
+        {
+            $_GET['action'] = "";   //Esto es para evitar los errores de variable
+        }
 
-    $salaManager = new SalaManager($_POST['idSala']);
-    $sala = $salaManager->obtenerSala($_POST['idSala']);
-?>
+        $salaContentManager = new SalaContentManager($_GET['idSala']);
+        $sala = $salaContentManager->obtenerSala($_GET['idSala']);  
+        
+        if($_GET['action'] == 'error')
+        {
+            echo "<p style='color:red'>Error inesperado. Intente nuevamente.</p>";
+        }
 
-<aside class="sidebar">
+        //Esto para evitar accesos ilegales cuando la sala esta finalizada.
+        if($sala->getEstado() != "EN_PREPARACION"   && !in_array($_SESSION['nickName'], $sala->getParticipantes()) && $_SESSION['nickName'] != $sala->getNickNameCreador())
+        {
+            header("Location: paginaPrincipal.php");
+            exit();
+        }
+        
+    ?>
 
-    <div class="sidebar-header">
-        <img src="../assets/EventConnect.png"
-             alt="Logo"
-             class="logo-sidebar">
-
-        <h2>EventConnect</h2>
-    </div>
-
-    <form action="paginaPrincipal.php">
-        <button type="submit" class="btn-sidebar">
-            ← Volver
-        </button>
+    <h2>EventConnect - Visor de Sala</h2>
+    <br>
+    <hr>
+    <br>
+    <form action="./paginaPrincipal.php" method="post">
+        <input type="submit" value="Volver a pagina principal">
     </form>
+    <br><hr>
+    <h3>Nombre Sala: <?php echo $sala->getTitulo(); ?></h3>
+    <h4>Fecha inicio evento: <?php echo date("d/m/Y H:i", strtotime($sala->getFechaHora())); ?></h4>
+    <h4> 
+        <?php
+            
+            if($sala->getModalidad() == 'virtual')
+            {
+                echo "<span style='color:green'>Online/Virtual </span><br>" ; 
+            }
 
-    <div class="sidebar-user">
-        Conectado como
-        <br>
-        <strong>
-            <?php echo $_SESSION['nickName']; ?>
-        </strong>
-    </div>
+        ?></h4>
+  
 
-    <form action="../control/sessionManager.php"
-          method="post"
-          class="logout-form">
+    <?php
+        //Siempre y cuando el user no sea el creador o que no este dentro de los participantes.
+        if($_SESSION['nickName'] != $sala->getNickNameCreador() && !in_array($_SESSION['nickName'], $sala->getParticipantes()))
+        {?>
+            <form action="../control/controller.php" method="POST">
+                <input type="hidden" name="idSala" value="<?php echo $sala->getIdSala(); ?>">
+                <button type="submit" name="action" value="Unirse">Unirse</button>
+            </form>
+        <?php
+        }
+    ?>
 
-        <button type="submit"
-                name="action"
-                value="Cerrar Sesión"
-                class="btn-logout">
+    <hr>
+    <p>Descripción: <?php echo $sala->getDescripcion(); ?></p>
+    <hr>
+    <p>Participantes:</p>
+    <?php
+        echo "<p>" . $sala->getNickNameCreador() . " (Creador)</p>";
+        foreach($sala->getParticipantes() as $participante)
+        {
+            echo "<span>" . $participante . "</span> <br> <br>";
 
-            Cerrar Sesión
+            if($_SESSION['nickName'] == $sala->getNickNameCreador())
+            {
+                ?>
+                <form action="../control/controller.php" method="POST" style="display:inline;">
+                    <input type="hidden" name="idSala" value="<?php echo $sala->getIdSala(); ?>">
+                    <input type="hidden" name="nickName" value="<?php echo $participante; ?>">
+                    <button type="submit" name="action" value="Eliminar Participante">
+                        <span style='color:red'> Eliminar Participante </span>
+                    </button>
+                </form>
+                <br>
+                
+                <?php
+            }
+        }
+    ?>
+    <hr>
+    
+    <?php
 
-        </button>
+        //Solo podra ver el chat si es participante o si es el creador de la sala.
+        if($_SESSION['nickName'] == $sala->getNickNameCreador() || in_array($_SESSION['nickName'], $sala->getParticipantes()))
+        {
+            echo '<p>Mensajes:</p>';
 
-    </form>
+            $chat = $salaContentManager->obtenerChat($_GET['idSala']);
+            foreach($chat as $mensaje)
+            {
+                echo "<p><strong>" . $mensaje->getNicknameEmisor() . ":</strong> " . $mensaje->getContenido() . " <small><em> <" . date("d/m/Y H:i", strtotime($mensaje->getFechaHora())) . "</em>></small></   p>";
+            }
 
-</aside>
+            echo 
+                '<form action="../control/controller.php" method="POST">
+                    <input
+                        type="hidden"
+                        name="idSala"
+                        value="' . $sala->getIdSala() . '"
+                    >
 
-<main class="main-content">
+                    <input
+                        type="text"
+                        name="mensaje"
+                        maxlength="100"
+                        placeholder="Escribe un mensaje..."
+                        required
+                    >
 
-    <div class="glass-card">
+                    <button type="submit" name="action" value="Enviar Mensaje">
+                        Enviar
+                    </button>
+                </form>';
+        }
 
-        <h1>
-            <?php echo $sala->getTitulo(); ?>
-        </h1>
-
-        <div class="info-sala">
-
-            <div class="sala-badge">
-                Modalidad:
-                <?php echo $sala->getModalidad(); ?>
-            </div>
-
-        </div>
-
-        <div class="seccion-sala">
-
-            <h3>Descripción</h3>
-
-            <p>
-                <?php echo $sala->getDescripcion(); ?>
-            </p>
-
-        </div>
-
-        <div class="seccion-sala">
-
-            <h3>Participantes</h3>
-
-            <?php
-                if(count($sala->getParticipantes()) > 0)
-                {
-                    foreach($sala->getParticipantes() as $participante)
-                    {
-                        echo '
-                        <div class="participante-card">
-                            '.$participante.'
-                        </div>';
-                    }
-                }
-                else
-                {
-                    echo '<p>No hay participantes registrados.</p>';
-                }
-            ?>
-
-        </div>
-
-    </div>
-
-</main>
+    ?>
 
 </body>
 </html>

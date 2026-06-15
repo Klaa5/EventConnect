@@ -4,14 +4,18 @@ class chat
 {
     private $idChat;
     private $idSala;
-    private $mensajes = [];     //lista de objetos mensaje
+    private $nickNameEmisor;
+    private $contenido;
+    private $fechaHora;
 
-    public function __construct($idChat, $idSala)
+    public function __construct($idChat, $idSala, $nickNameEmisor, $contenido, $fechaHora)
     {
         $this->idChat = $idChat;
         $this->idSala = $idSala;
+        $this->nickNameEmisor = $nickNameEmisor;
+        $this->contenido = $contenido;
+        $this->fechaHora = $fechaHora;
 
-       
     }
 
     public function getIdChat()
@@ -24,9 +28,19 @@ class chat
         return $this->idSala;
     }
 
-    public function getMensajes()
+    public function getNicknameEmisor()
     {
-        //por hacer. pendiente ya que creo que debo hacer una consulta a la bd
+        return $this->nickNameEmisor;
+    }
+
+    public function getContenido()
+    {
+        return $this->contenido;
+    }
+
+    public function getFechaHora()
+    {
+        return $this->fechaHora;
     }
 
 }
