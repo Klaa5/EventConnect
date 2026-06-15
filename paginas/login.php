@@ -100,6 +100,36 @@ if(!empty($_SESSION['nickName']))
                         class="input-eventconnect"
                         required>
 
+                    <label>Nombre</label>
+                    <input
+                        type="text"
+                        name="nombreUser"
+                        class="input-eventconnect"
+                        required>
+
+                    <label>Apellido</label>
+                    <input
+                        type="text"
+                        name="apellidoUser"
+                        class="input-eventconnect"
+                        required>
+
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        name="emailUser"
+                        class="input-eventconnect"
+                        required>
+
+                    <label>Edad</label>
+                    <input
+                        type="number"
+                        name="edadUser"
+                        class="input-eventconnect"
+                        min="1"
+                        max="120"
+                        required>
+                        
                     <button
                         type="submit"
                         name="action"
