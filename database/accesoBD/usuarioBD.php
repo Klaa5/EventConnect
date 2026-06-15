@@ -69,23 +69,6 @@
             $datosUsuario = new Usuario($tupla['nickname'], $tupla['password'], $tupla['nombre'], $tupla['apellido'], $tupla['email'], $tupla['edad'], $tupla['Link'], $tupla['verifiedUser']);
      
             return $datosUsuario;
-        }
-
-        public function obtenerDatosUsuario($nickName, $conexion)
-        {
-            $sql = "SELECT * FROM Usuario WHERE nickname = '$nickName'";
-            $resultado = mysqli_query($conexion, $sql);
-            $tupla = mysqli_fetch_array($resultado);
-            
-            if($tupla['Link'] == null)
-            {
-                $tupla['Link'] = "Sin links asociados";
-            }
-
-            $datosUsuario = new Usuario($tupla['nickname'], $tupla['password'], $tupla['nombre'], $tupla['apellido'], $tupla['email'], $tupla['edad'], $tupla['Link'], $tupla['verifiedUser']);
-     
-            return $datosUsuario;
-        }
-    }
-                
+        } 
+    }      
 ?>

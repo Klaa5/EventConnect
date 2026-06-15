@@ -13,46 +13,135 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventConnect - Login</title>
+    <link rel="stylesheet" href="../assets/CSS/estilos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="../assets/EventConnect.png">
 </head>
-<body style="background-color: lightblue;">
-<h4>Iniciar Sesion</h4>
-<form action="../control/controller.php" method="post">
+<body>
 
-    <p>Ingrese Usuario</p>
-    <input type="text" name="nickName" id="nickName">
-    <p>Ingrese Contraseña</p>
-    <input type="password" name="password" id="password">
-    <input type="submit" value="Iniciar Sesión" name="action">
+<div class="login-container">
 
-</form>
+    <div class="glass-card login-card">
 
-<hr>
-<h4>Crear Cuenta  </h4> 
-<form action="../control/controller.php" method="post">
-    <p>Ingrese Nickname</p>
-    <input type="text" name="nickNameReg" id="nickNameReg">
-    <p>Ingrese Contraseña</p>
-    <input type="password" name="passwordReg" id="passwordReg">
-    <p>Ingrese Nombre</p>
-    <input type="text" name="nombreUser" id="nombreUser">
-    <p>Ingrese Apellido</p>
-    <input type="text" name="apellidoUser" id="apellidoUser">
-    <p>Ingrese Email</p>
-    <input type="email" name="emailUser" id="emailUser">
-    <p>Ingrese Edad</p>
-    <input type="number" name="edadUser" id="edadUser">
-    <input type="submit" value="Registrarse" name="action">
-</form>
-<br><br>
+        <div class="login-header">
+            <img src="../assets/EventConnect.png" alt="EventConnect" class="logo-login">
+            <h1>EVENTCONNECT</h1>
+            <p>Conecta personas, crea eventos</p>
+        </div>
 
-<span>Problemas al registrarse? Haz click </span>
-<a href="https://www.youtube.com/watch?v=Hg469wSrZhI">aqui</a>
+        <div class="login-grid">
+            <div class="login-box">
 
-<br><br><br><br><br>
+                <h2>Iniciar Sesión</h2>
 
-<p><font size="1">© 1996 EventConnect - MATEX inc</font></p>
+                <form action="../control/controller.php" method="post">
 
+                    <label for="nickName">Usuario</label>
+                    <input
+                        class="input-eventconnect"
+                        type="text"
+                        name="nickName"
+                        id="nickName"
+                    >
+
+                    <label for="password">Contraseña</label>
+                    <input
+                        class="input-eventconnect"
+                        type="password"
+                        name="password"
+                        id="password"
+                    >
+
+                    <br>
+
+                    <input
+                        class="btn-login"
+                        type="submit"
+                        value="Iniciar Sesión"
+                        name="action"
+                    >
+
+                </form>
+
+            </div>
+            <div class="login-box">
+
+                <h2>Crear Cuenta</h2>
+
+                <form action="../control/controller.php" method="post">
+
+                    <label for="nickNameReg">Nickname</label>
+                    <input
+                        class="input-eventconnect"
+                        type="text"
+                        name="nickNameReg"
+                        id="nickNameReg"
+                    >
+
+                    <label for="passwordReg">Contraseña</label>
+                    <input
+                        class="input-eventconnect"
+                        type="password"
+                        name="passwordReg"
+                        id="passwordReg"
+                    >
+
+                    <label for="nombreUser">Nombre</label>
+                    <input
+                        class="input-eventconnect"
+                        type="text"
+                        name="nombreUser"
+                        id="nombreUser"
+                    >
+
+                    <label for="apellidoUser">Apellido</label>
+                    <input
+                        class="input-eventconnect"
+                        type="text"
+                        name="apellidoUser"
+                        id="apellidoUser"
+                    >
+
+                    <label for="emailUser">Email</label>
+                    <input
+                        class="input-eventconnect"
+                        type="email"
+                        name="emailUser"
+                        id="emailUser"
+                    >
+
+                    <label for="edadUser">Edad</label>
+                    <input
+                        class="input-eventconnect"
+                        type="number"
+                        name="edadUser"
+                        id="edadUser"
+                    >
+
+                    <br>
+
+                    <input
+                        class="btn-register"
+                        type="submit"
+                        value="Registrarse"
+                        name="action"
+                    >
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="footer-eventconnect">
+            © 2026 EventConnect
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>

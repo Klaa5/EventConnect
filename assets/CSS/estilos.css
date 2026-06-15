@@ -1,19 +1,24 @@
+:root{
+    --primary:#0d6efd;
+    --success:#198754;
+    --danger:#dc3545;
+    --glass-bg:rgba(255,255,255,.08);
+    --glass-bg-strong:rgba(255,255,255,.10);
+    --glass-hover:rgba(255,255,255,.15);
+    --glass-border:rgba(255,255,255,.12);
+    --font-main:'Inter','Segoe UI',Arial,sans-serif;
+    --font-title:'Orbitron',sans-serif;
+}
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
-
 body{
     min-height:100vh;
-    background:linear-gradient(
-        135deg,
-        #0026ff,
-        #14bce6
-    );
-    font-family:'Orbitron',sans-serif;
+    background:linear-gradient(135deg,#0026ff,#14bce6);
+    font-family:var(--font-main);
 }
-
 body::before{
     content:"";
     position:fixed;
@@ -25,142 +30,138 @@ body::before{
     transform:rotate(-15deg);
     z-index:-1;
 }
-
+h1,
+h2,
+h3,
+.sala-titulo,
+.sidebar-header h2{
+    font-family:var(--font-title);
+}
+label,
+p,
+.sala-info,
+.sala-badge,
+.seccion-sala p,
+.participante-card,
+.chat-message,
+.footer-eventconnect,
+.sidebar-user,
+input,
+textarea,
+select,
+button{
+    font-family:var(--font-main);
+}
 .sidebar{
     position:fixed;
     top:0;
     left:0;
     width:280px;
     height:100vh;
+    display:flex;
+    flex-direction:column;
+    padding:25px;
     background:rgba(0,0,0,.30);
     backdrop-filter:blur(15px);
     border-right:1px solid rgba(255,255,255,.15);
-    padding:25px;
-    display:flex;
-    flex-direction:column;
 }
-
-.sidebar-header{
+.sidebar-header,
+.sidebar-user{
     text-align:center;
     color:white;
 }
-
 .logo-sidebar{
     width:90px;
     margin-bottom:15px;
 }
-
 .sidebar-header h2{
     font-size:1.2rem;
     letter-spacing:2px;
 }
-
 .sidebar-user{
     margin-top:30px;
-    color:white;
-    text-align:center;
     font-size:.9rem;
 }
-
+.logout-form{
+    margin-top:auto;
+}
 .btn-sidebar,
-.btn-logout,
 .btn-login,
-.btn-register{
+.btn-register,
+.btn-logout{
     width:100%;
     padding:12px;
     border:none;
     border-radius:15px;
     color:white;
-    font-family:'Orbitron',sans-serif;
     cursor:pointer;
     transition:.3s;
 }
-
 .btn-sidebar{
     margin-top:25px;
-    background:#0d6efd;
 }
-
+.btn-sidebar,
 .btn-login{
-    background:#0d6efd;
+    background:var(--primary);
 }
-
 .btn-register{
-    background:#198754;
+    background:var(--success);
 }
-
 .btn-logout{
-    background:#dc3545;
+    background:var(--danger);
 }
-
 .btn-sidebar:hover,
 .btn-login:hover,
 .btn-register:hover,
 .btn-logout:hover{
     transform:translateY(-2px);
 }
-
-.logout-form{
-    margin-top:auto;
-}
-
 .main-content{
     margin-left:280px;
     padding:40px;
 }
-
 .glass-card{
-    background:rgba(255,255,255,.10);
+    min-height:85vh;
+    padding:40px;
+    border-radius:25px;
+    color:white;
+    background:var(--glass-bg-strong);
     backdrop-filter:blur(15px);
     border:1px solid rgba(255,255,255,.15);
-    border-radius:25px;
-    padding:40px;
-    min-height:85vh;
-    color:white;
 }
-
 .glass-card h1{
     text-align:center;
     margin-bottom:25px;
     letter-spacing:3px;
     text-transform:uppercase;
 }
-
 .glass-card form{
     display:flex;
     flex-direction:column;
 }
-
 .glass-card label{
     margin-top:15px;
     margin-bottom:8px;
-    color:white;
 }
-
 .input-eventconnect{
     width:100%;
     padding:12px;
     border:none;
     border-radius:12px;
-    background:rgba(255,255,255,.12);
     color:white;
-    font-family:'Orbitron',sans-serif;
+    background:rgba(255,255,255,.12);
 }
-
 .input-eventconnect:focus{
     outline:none;
     background:rgba(255,255,255,.18);
 }
-
 textarea.input-eventconnect{
     resize:vertical;
     min-height:120px;
 }
-
 select.input-eventconnect option{
     color:black;
 }
-
 .login-container{
     min-height:100vh;
     display:flex;
@@ -168,73 +169,61 @@ select.input-eventconnect option{
     align-items:center;
     padding:40px;
 }
-
 .login-card{
     width:100%;
     max-width:1000px;
 }
-
 .login-header{
     text-align:center;
     color:white;
     margin-bottom:40px;
 }
-
 .logo-login{
     width:120px;
     margin-bottom:15px;
 }
-
 .login-header h1{
     letter-spacing:4px;
     margin-bottom:10px;
 }
-
 .login-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:30px;
 }
-
 .login-box{
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:20px;
     padding:25px;
+    border-radius:20px;
     color:white;
+    background:var(--glass-bg);
+    border:1px solid rgba(255,255,255,.10);
 }
-
 .login-box h2{
     text-align:center;
     margin-bottom:20px;
 }
-
 .salas-listado{
     display:flex;
     flex-direction:column;
     gap:15px;
 }
-
 .sala-form{
     width:100%;
 }
-
 .sala-card{
     width:100%;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:20px;
     padding:20px;
-    color:white;
     text-align:left;
+    color:white;
     cursor:pointer;
     transition:.3s;
-    font-family:'Orbitron',sans-serif;
+    background:var(--glass-bg);
+    border:1px solid var(--glass-border);
+    border-radius:20px;
 }
-
 .sala-card:hover{
     transform:translateY(-3px);
-    background:rgba(255,255,255,.15);
+    background:var(--glass-hover);
 }
 
 .sala-titulo{
@@ -255,58 +244,68 @@ select.input-eventconnect option{
 }
 
 .sala-badge{
+    padding:12px 20px;
+
     background:rgba(255,255,255,.12);
     border:1px solid rgba(255,255,255,.15);
     border-radius:15px;
-    padding:12px 20px;
 }
-
 .seccion-sala{
     margin-top:30px;
 }
-
 .seccion-sala h3{
     margin-bottom:15px;
     letter-spacing:2px;
 }
-
 .seccion-sala p{
     line-height:1.6;
 }
-
 .participante-card{
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:15px;
     padding:15px;
     margin-bottom:10px;
     transition:.3s;
+    background:var(--glass-bg);
+    border:1px solid var(--glass-border);
+    border-radius:15px;
 }
-
 .participante-card:hover{
-    background:rgba(255,255,255,.15);
+    background:var(--glass-hover);
 }
-
+.chat-box{
+    padding:15px;
+    margin-bottom:20px;
+    max-height:400px;
+    overflow-y:auto;
+    background:var(--glass-bg);
+    border:1px solid var(--glass-border);
+    border-radius:15px;
+}
+.chat-message{
+    padding:10px;
+    margin-bottom:12px;
+    background:rgba(255,255,255,.05);
+    border-radius:10px;
+}
+.chat-form{
+    display:flex;
+    gap:10px;
+}
 .footer-eventconnect{
-    text-align:center;
     margin-top:20px;
-    color:rgba(255,255,255,.7);
+    text-align:center;
     font-size:.8rem;
+    color:rgba(255,255,255,.7);
 }
-
 @media (max-width:900px){
-
     .sidebar{
         position:relative;
         width:100%;
         height:auto;
     }
-
     .main-content{
         margin-left:0;
         padding:20px;
     }
-
     .login-grid{
         grid-template-columns:1fr;
     }
