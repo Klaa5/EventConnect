@@ -97,9 +97,40 @@ button{
     cursor:pointer;
     transition:.3s;
 }
+.btn-buttone{
+    background:#dc2626;
+    color:white;
+    border:none;
+    border-radius:10px;
+    padding:8px 14px;
+    font-size:14px;
+    cursor:pointer;
+    transition:.3s;
+    width:auto;
+}
+.btn-buttone:hover{
+    background:rgba(255,255,255,.20);
+    transform:translateY(-2px);
+}
+.btn-regresar{
+    width:auto;
+    padding:12px 20px;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+    transition:.3s;
+    background:rgba(255,255,255,.12);
+    color:white;
+}
+
+.btn-regresar:hover{
+    background:rgba(255,255,255,.20);
+    transform:translateY(-2px);
+}
 .btn-sidebar{
     margin-top:25px;
 }
+
 .btn-sidebar,
 .btn-login{
     background:var(--primary);
