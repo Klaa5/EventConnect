@@ -23,9 +23,12 @@ if(empty($_SESSION['nickName']))
 <body>
 
     <div class="login-container">
-
+    
         <div class="glass-card login-card">
 
+        <button type="button" class="btn-regresar" onclick="window.location.href='paginaPrincipal.php'">
+           ← Regresar
+        </button>
             <div class="login-header">
                 <img src="../assets/EventConnect.png" alt="Logo" class="logo-login">
                 <h1>EVENTCONNECT</h1>
@@ -80,12 +83,21 @@ if(empty($_SESSION['nickName']))
 
                 <br>
 
-                <input
-                    class="btn-sidebar"
-                    type="submit"
-                    value="Crear Sala"
-                    name="action"
-                >
+                <div class="form-buttons">
+
+                    <input
+                        class="btn-sidebar"
+                        type="submit"
+                        value="Crear Sala"
+                        name="action"
+                    >
+
+                    <input
+                        class="btn-buttone"
+                        type="reset"
+                        value="Borrar Campos"
+                    >
+                </div>
 
             </form>
 
