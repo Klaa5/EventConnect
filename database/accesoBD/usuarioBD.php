@@ -66,7 +66,7 @@
                 $tupla['Link'] = "Sin links asociados";
             }
 
-            $datosUsuario = new Usuario($tupla['nickname'], $tupla['password'], $tupla['nombre'], $tupla['apellido'], $tupla['email'], $tupla['edad'], $tupla['Link'], $tupla['verifiedUser']);
+            $datosUsuario = new Usuario($tupla['nickname'], $tupla['password'], $tupla['nombre'], $tupla['apellido'], $tupla['email'], $tupla['edad'], $tupla['Link'], $tupla['verifiedUser'], $tupla['promedioRank']);
      
             return $datosUsuario;
         } 
