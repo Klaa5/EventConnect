@@ -86,7 +86,15 @@
         header("Location: ../paginas/login.php");
         exit();
     }
-
+    if($_POST['action'] == "Actualizar Link")
+    {
+    $nickName = $_POST['nickName'];
+    $link = $_POST['link'];
+    $accountManager = new accountManager();
+    $accountManager->actualizarLink($nickName, $link);
+    header("Location: ../paginas/userProfile.php?nickName=".$nickName);
+    exit();
+    }
 
     //_____________________________________________
     //_______________SALA O HOME___________________

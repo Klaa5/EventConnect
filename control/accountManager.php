@@ -29,7 +29,16 @@
         {
             return $this->accesoUserBD->obtenerDatosUsuario($nickName, $this->conexion);
         }
+        public function actualizarLink($nickName, $link)
+        {
+            $consulta = "UPDATE Usuario SET Link = ? WHERE nickname = ?";
 
+            $stmt = $this->conexion->prepare($consulta);
+            $stmt->bind_param("ss", $link, $nickName);
+            $stmt->execute();
+            $stmt->close();
+            return true;
+        }
     }
    
     

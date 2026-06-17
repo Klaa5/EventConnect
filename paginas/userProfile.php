@@ -40,7 +40,7 @@ if(empty($_SESSION['nickName']))
 
     <div class="sidebar-user">
         Usuario:<br>
-        <strong><?php echo $_SESSION['nickName']; ?></strong>
+        <strong><?php echo $datosUsuario->getNickName(); ?></strong>
     </div>
 
     <form action="./paginaPrincipal.php" method="post">
@@ -53,7 +53,7 @@ if(empty($_SESSION['nickName']))
         <input
             type="hidden"
             name="nickName"
-            value="<?php echo $_SESSION['nickName']; ?>"
+            value="<?php echo $datosUsuario->getNickName(); ?>"
         >
 
         <button type="submit" class="btn-sidebar">
@@ -71,7 +71,7 @@ if(empty($_SESSION['nickName']))
 
         <div class="participante-card">
             <strong>Nickname:</strong>
-            <?php echo $_SESSION['nickName']; ?>
+            <?php echo $datosUsuario->getNickName(); ?>
         </div>
 
         <div class="participante-card">
@@ -95,8 +95,30 @@ if(empty($_SESSION['nickName']))
         </div>
 
         <div class="participante-card">
-            <strong>Link:</strong>
-            <?php echo $datosUsuario->getLink(); ?>
+            <form action="../control/controller.php" method="post">
+                <strong>Link:</strong>
+                <input
+                    type="text"
+                    name="link"
+                    class="input-eventconnect"
+                    value="<?php echo $datosUsuario->getLink(); ?>"
+                    placeholder="Ingrese su link"
+                >
+                <input
+                    type="hidden"
+                    name="nickName"
+                    value="<?php echo $datosUsuario->getNickName(); ?>"
+                >
+                <button
+                    type="submit"
+                    name="action"
+                    value="Actualizar Link"
+                    class="btn-regresar"
+                    style="margin-top:10px;"
+                >
+                    Guardar Link
+                </button>
+            </form>
         </div>
 
         <div class="seccion-sala">
