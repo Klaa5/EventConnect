@@ -19,6 +19,10 @@ class rank
         {
             $this->puntaje = 0;
         }
+        else
+        {
+            $this->puntaje = $puntaje;
+        }
     }
 
     public function getIdRank()
