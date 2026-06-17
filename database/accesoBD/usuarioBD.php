@@ -124,7 +124,7 @@
         {
             $sql = "UPDATE Usuario SET promedioRank = ? WHERE nickname = ?";
             $instruccion = $conexion->prepare($sql);
-            $instruccion->bind_param("is", $puntaje, $nickName);
+            $instruccion->bind_param("ds", $puntaje, $nickName);
             $instruccion->execute();
 
         }

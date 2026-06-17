@@ -2,7 +2,7 @@
     include_once "../database/accesoBD/usuarioBD.php";
     include_once "../database/conexion.php";
     include_once "../objetos/usuario.php";
-    include_once "./rankManager.php";
+    include_once "rankManager.php";
     
     class accountManager
     {
@@ -62,6 +62,8 @@
             }
 
             $promedioRank = $sumaRanks / $cantidadRanks; 
+            
+            $promedioRank = round($promedioRank, 1);    //Solo obtengo el primer numero luego de la coma
 
             return $this->accesoUserBD->actualizarRankPromedio($nickName, $this->conexion, $promedioRank);
 

@@ -14,7 +14,7 @@ class Usuario
     private $verifiedUser;
 
 
-    public function __construct($nickName, $password, $nombre, $apellido, $email, $edad, $link, $verifiedUser, $rankPromedio)
+    public function __construct($nickName, $password, $nombre, $apellido, $email, $edad, $link, $verifiedUser, $rankPromedio) 
     {
         $this->nickName = $nickName;
         $this->password = $password;
@@ -37,6 +37,10 @@ class Usuario
         if($rankPromedio == null)
         {
             $this->rankPromedio = 0;
+        }
+        else
+        {
+            $this->rankPromedio = $rankPromedio;
         }
         
     }
