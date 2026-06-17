@@ -408,3 +408,26 @@ select.input-eventconnect option{
     color: #000552;
     font-weight: bold;
 }
+
+.btn-eliminar-chico {
+    padding: 4px 8px;       
+    font-size: 12px;        
+    border-radius: 4px;     
+    cursor: pointer;
+    line-height: 1;         
+}
+
+.btn-votar-chico {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.btn-votar-chico:hover {
+    background-color: #2980b9;
+}
