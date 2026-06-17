@@ -341,3 +341,11 @@ select.input-eventconnect option{
         grid-template-columns:1fr;
     }
 }
+.participante-card{
+    cursor:pointer;
+}
+
+.participante-card:hover{
+    background:rgba(255,255,255,.20);
+    transform:translateY(-2px);
+}

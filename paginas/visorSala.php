@@ -136,49 +136,62 @@ if(
 
     <h3>Participantes</h3>
 
-    <div class="participante-card">
-        <?php echo $sala->getNickNameCreador(); ?> (Creador)
+    <?php
+    $creador = $sala->getNickNameCreador();
+    ?>
+
+    <div
+        class="participante-card"
+        onclick="window.location.href='userProfile.php?nickName=<?php echo urlencode($creador); ?>'"
+        style="cursor:pointer;"
+    >
+        <strong><?php echo $creador; ?></strong> (Creador)
     </div>
 
     <?php
     foreach($sala->getParticipantes() as $participante)
     {
-        echo "<div class='participante-card'>";
-        echo $participante;
-
-        if($_SESSION['nickName'] == $sala->getNickNameCreador())
-        {
-            ?>
-
-            <form action="../control/controller.php" method="POST">
-
-                <input
-                    type="hidden"
-                    name="idSala"
-                    value="<?php echo $sala->getIdSala(); ?>"
-                >
-
-                <input
-                    type="hidden"
-                    name="nickName"
-                    value="<?php echo $participante; ?>"
-                >
-
-                <button
-                    class="btn-logout"
-                    type="submit"
-                    name="action"
-                    value="Eliminar Participante"
-                >
-                    Eliminar Participante
-                </button>
-
-            </form>
+    ?>
+        <div
+            class="participante-card"
+            onclick="window.location.href='userProfile.php?nickName=<?php echo urlencode($participante); ?>'"
+            style="cursor:pointer;"
+        >
+            <?php echo $participante; ?>
 
             <?php
-        }
+            if($_SESSION['nickName'] == $sala->getNickNameCreador())
+            {
+            ?>
+                <form action="../control/controller.php" method="POST" onclick="event.stopPropagation();">
 
-        echo "</div>";
+                    <input
+                        type="hidden"
+                        name="idSala"
+                        value="<?php echo $sala->getIdSala(); ?>"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="nickName"
+                        value="<?php echo $participante; ?>"
+                    >
+
+                    <button
+                        class="btn-logout"
+                        type="submit"
+                        name="action"
+                        value="Eliminar Participante"
+                    >
+                        Eliminar Participante
+                    </button>
+
+                </form>
+            <?php
+            }
+            ?>
+        </div>
+    <?php
     }
     ?>
 
