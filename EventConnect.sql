@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1deb1+deb12u1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 11-06-2026 a las 02:39:54
--- Versión del servidor: 10.11.14-MariaDB-0+deb12u2
--- Versión de PHP: 8.2.30
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 17-06-2026 a las 08:28:09
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -46,7 +46,10 @@ INSERT INTO `Chat` (`id_chat`, `Id_sala`, `nickname`, `Contenido`, `fecha`) VALU
 (4, 4, '1', 'ok', '2026-06-10 23:37:02'),
 (5, 4, '2', 'Que dices?', '2026-06-10 23:37:24'),
 (6, 4, '2', 'Bién', '2026-06-10 23:37:31'),
-(7, 4, '2', 'No pueden con el AWP', '2026-06-10 23:37:46');
+(7, 4, '2', 'No pueden con el AWP', '2026-06-10 23:37:46'),
+(8, 1, '11', 'lol', '2026-06-15 02:52:34'),
+(9, 1, '11', 'xd', '2026-06-15 02:52:38'),
+(10, 5, '11', 'gij', '2026-06-16 15:49:39');
 
 -- --------------------------------------------------------
 
@@ -68,7 +71,12 @@ INSERT INTO `Participa` (`id_participacion`, `nickname`, `Id_sala`) VALUES
 (1, '2', 4),
 (2, '2', 1),
 (3, '2', 7),
-(4, '1', 6);
+(4, '1', 6),
+(5, '11', 1),
+(6, '11', 6),
+(7, '11', 5),
+(8, '3', 1),
+(9, 'a', 1);
 
 -- --------------------------------------------------------
 
@@ -128,17 +136,24 @@ CREATE TABLE `Usuario` (
   `Link` varchar(100) DEFAULT NULL,
   `verifiedUser` tinyint(1) NOT NULL DEFAULT 0,
   `nombre` varchar(50) NOT NULL,
-  `apellido` varchar(50) NOT NULL
+  `apellido` varchar(50) NOT NULL,
+  `Token` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `Usuario`
 --
 
-INSERT INTO `Usuario` (`nickname`, `password`, `email`, `edad`, `Link`, `verifiedUser`, `nombre`, `apellido`) VALUES
-('1', '$2y$10$gMjNyg3ij9aVR3kLowOhd.6nbMabes5d0Hze75DQXtS2PyDVsv6vO', '', 0, NULL, 0, '', ''),
-('2', '$2y$10$s5VguCmON72v2dtI.wTqtuPiN/j6NMenYp.58/dj8rSPc3aWDYyzW', '2@gmail.com', 12, 'Sin descripcion', 0, '2', '2'),
-('Matero', '$2y$10$me7CYsI4Ef47vTggMJz8uu.R5tTfaxndUMobu3AJhwnhzGw5HMa9C', '', 0, NULL, 0, '', '');
+INSERT INTO `Usuario` (`nickname`, `password`, `email`, `edad`, `Link`, `verifiedUser`, `nombre`, `apellido`, `Token`) VALUES
+('1', '$2y$10$gMjNyg3ij9aVR3kLowOhd.6nbMabes5d0Hze75DQXtS2PyDVsv6vO', '', 0, NULL, 0, '', '', NULL),
+('11', '$2y$10$qNAIZwXouYbkJ8K1h8Tjg.y7FroGQ0wde8b8C8cAVn96fJz0SfkUO', '111@gm.com', 11, 'Discord: http://localhost/phpmyadmin/index.php?route=/sql&db=EventConnect&table=Usuario&pos=0', 1, '11', '11', NULL),
+('2', '$2y$10$s5VguCmON72v2dtI.wTqtuPiN/j6NMenYp.58/dj8rSPc3aWDYyzW', '2@gmail.com', 12, 'Sin descripcion', 0, '2', '2', NULL),
+('3', '$2y$10$3DdJT39vy5q1G7QijKpX7.gwn0GKOv73IDs8rNFVELYIZJDbtbqOO', '3@gm.com', 3, 'Sin descripcion', 1, '3', '3', NULL),
+('4', '$2y$10$DRuWvc5dUFS0VYgtnIG48uKoOSzLarF44tV8CuRUjrZkU8Ut6d8ia', '4@gmia.com', 4, 'Sin descripcion', 1, '4', '4', NULL),
+('a', '$2y$10$lazMZYXbRrxTBhiIhg3..eeQyNivUQc3pCJ9rlR0THxiLETZMYGa6', 'a@gm.com', 1, 'Sin descripcion', 1, 'a', 'a', NULL),
+('Matero', '$2y$10$me7CYsI4Ef47vTggMJz8uu.R5tTfaxndUMobu3AJhwnhzGw5HMa9C', '', 0, NULL, 0, '', '', NULL),
+('sa', '$2y$10$5WUgI07KUtfB36TbWAjmL.QCLivkZzsMuwIhzlIEm2D6AcDuaRJy.', 'sa@1.com', 123, 'Sin descripcion', 0, 'sant', 'sa', NULL),
+('santiage', '$2y$10$0XOS7.VTORjIu5rVe1T7JOmCim6DcKgi6G7JFLasFpE0DRXc/W3X6', 'ga@pabo.com', 14, 'Sin descripcion', 0, 'Chileno', 'Sanguinetti', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -190,13 +205,13 @@ ALTER TABLE `Usuario`
 -- AUTO_INCREMENT de la tabla `Chat`
 --
 ALTER TABLE `Chat`
-  MODIFY `id_chat` int(11) NOT NULL AUTO_INCREMENT COMMENT 'es auto increment', AUTO_INCREMENT=8;
+  MODIFY `id_chat` int(11) NOT NULL AUTO_INCREMENT COMMENT 'es auto increment', AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `Participa`
 --
 ALTER TABLE `Participa`
-  MODIFY `id_participacion` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Es auto increment', AUTO_INCREMENT=5;
+  MODIFY `id_participacion` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Es auto increment', AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `Sala`
