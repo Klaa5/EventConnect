@@ -125,7 +125,19 @@ if(empty($_SESSION['nickName']))
 
         <strong>Puntaje de la comunidad: 
             <span class="<?php echo $claseColor; ?>">
-                <strong><?php echo $rankPromedio; ?></strong>
+                <strong>
+                    <?php
+                        if($rankPromedio != 0 && $cantidadVotos != 0)
+                        {
+                            echo $rankPromedio;
+                        }
+                        else
+                        {
+                            echo 'Sin calificaciones';
+                        } 
+                    ?>
+                </strong>
+            
             </span> 
         </strong>
         <i> <?php echo '(' . $cantidadVotos . ") votos"; ?> </i>
