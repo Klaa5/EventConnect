@@ -6,7 +6,7 @@ class rank
     private $nickNameEvaluado;
     private $nickNameEvaluador;
     private $idSala;
-    
+    private $puntaje;
 
     public function __construct($idRank, $nickNameEvaluado, $nickNameEvaluador, $idSala)
     {
@@ -34,5 +34,10 @@ class rank
     public function getIdSala()
     {
         return $this->idSala;
+    }
+
+    public function getPuntaje()
+    {
+        return $this->puntaje;
     }
 }
