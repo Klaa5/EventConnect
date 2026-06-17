@@ -68,7 +68,7 @@ include_once "../objetos/sala.php";
 
         public function obtenerSalasUsuario($conexion, $nickName)
         {
-            $consulta = "SELECT Sala.* FROM Sala LEFT JOIN Participa ON Sala.Id_sala = Participa.Id_sala LEFT JOIN Usuario ON Participa.nickname = Usuario.nickname WHERE Sala.nicknameCreador = ? OR Participa.nickname = ?";
+            $consulta = "SELECT DISTINCT Sala.* FROM Sala LEFT JOIN Participa ON Sala.Id_sala = Participa.Id_sala LEFT JOIN Usuario ON Participa.nickname = Usuario.nickname WHERE Sala.nicknameCreador = ? OR Participa.nickname = ?";
             $instruccion = $conexion->prepare($consulta);
             $instruccion->bind_param("ss", $nickName, $nickName);
             $instruccion->execute();
