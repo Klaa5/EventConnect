@@ -17,42 +17,51 @@
             $accesoDBSala = new salaBD();
             $salas = $accesoDBSala->getAllSalas($this->conexion);
 
-            echo "<hr>";
+            echo "<div class='salas-listado'>";
 
             while($sala = mysqli_fetch_assoc($salas))
             {
-
                 if($sala['Estado'] != "FINALIZADA" && $sala['Estado'] != "EN_CURSO")
                 {
                     if($sala['Modalidad'] == "virtual")
                     {
-                        $mod = "<span style='color:green'>Evento Online/Virtual </span><br>";
+                        $mod = "🌐 Evento Online / Virtual";
                     }
                     else
                     {
-                        $mod = "";
-                    }  
+                        $mod = "📍 Evento Presencial";
+                    }
 
                     echo "
-                    <a href='../paginas/visorSala.php?idSala=" . $sala['Id_sala'] . "' style='text-decoration:none; color:inherit;'>
-                    
-                        <div style='padding:12px; margin:10px; width:300px;'>
-                            <h3 style='margin:0 0 5px 0;'>" . $sala['Titulo'] . "</h3>
-                            <span>Fecha de inicio: " . date("d/m/Y H:i", strtotime($sala['Fecha'])) . "</span>
-                            $mod 
+                    <a href='../paginas/visorSala.php?idSala=".$sala['Id_sala']."'
+                    style='text-decoration:none;color:inherit;'>
+
+                        <div class='sala-card'>
+
+                            <div class='sala-titulo'>
+                                ".$sala['Titulo']."
+                            </div>
+
+                            <div class='sala-info'>
+                                Fecha de inicio:
+                                ".date("d/m/Y H:i", strtotime($sala['Fecha']))."
+                                <br><br>
+                                ".$mod."
+                            </div>
+
                         </div>
-                        
+
                     </a>";
                 }
-
             }
 
+            echo "</div>";
         }
 
 
-    }
-    
+            }
+            
 
-    
+            
 
 ?>

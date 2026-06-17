@@ -29,7 +29,52 @@
         {
             return $this->accesoUserBD->obtenerDatosUsuario($nickName, $this->conexion);
         }
+        public function actualizarLink($nickName, $link)
+        {
+            $consulta = "UPDATE Usuario SET Link = ? WHERE nickname = ?";
 
+            $stmt = $this->conexion->prepare($consulta);
+            $stmt->bind_param("ss", $link, $nickName);
+            $stmt->execute();
+            $stmt->close();
+            return true;
+        }
+       public function generarTokenVerificacion($nickName)
+        {
+            $token = bin2hex(random_bytes(2));
+
+            $consulta = "
+                UPDATE Usuario
+                SET Token = ?
+                WHERE nickname = ?
+            ";
+
+            $stmt = $this->conexion->prepare($consulta);
+            $stmt->bind_param("ss", $token, $nickName);
+            $stmt->execute();
+            $stmt->close();
+
+            return $token;
+        }
+        public function verificarUsuario($token)
+        {
+            $consulta = "
+                UPDATE Usuario
+                SET verifiedUser = 1,
+                    Token = NULL
+                WHERE Token = ?
+            ";
+
+            $stmt = $this->conexion->prepare($consulta);
+            $stmt->bind_param("s", $token);
+            $stmt->execute();
+
+            $filas = $stmt->affected_rows;
+
+            $stmt->close();
+
+            return $filas > 0;
+        }
     }
    
     

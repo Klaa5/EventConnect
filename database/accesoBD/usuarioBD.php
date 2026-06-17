@@ -69,7 +69,6 @@
             $datosUsuario = new Usuario($tupla['nickname'], $tupla['password'], $tupla['nombre'], $tupla['apellido'], $tupla['email'], $tupla['edad'], $tupla['Link'], $tupla['verifiedUser']);
      
             return $datosUsuario;
-        }
-    }
-                
+        } 
+    }      
 ?>
