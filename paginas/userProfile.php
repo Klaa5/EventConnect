@@ -24,11 +24,15 @@ if(empty($_SESSION['nickName']))
 
 <?php
     include_once "../control/accountManager.php";
+    include_once "../control/rankManager.php";
 
     $userData = $_GET['nickName'];
 
     $accountManager = new accountManager();
+    $rankManager = new RankManager();
     $datosUsuario = $accountManager->obtenerDatosUsuario($userData);
+    $ranksRecibidos = $rankManager->obtenerRanksUser($datosUsuario->getNickName());
+    $cantidadVotos = count($ranksRecibidos);
 ?>
 
 <aside class="sidebar">
@@ -69,30 +73,63 @@ if(empty($_SESSION['nickName']))
 
         <h1>Perfil de Usuario</h1>
 
-        <div class="participante-card">
+        <div>
             <strong>Nickname:</strong>
-            <?php echo $datosUsuario->getNickName(); ?>
+            <?php echo $datosUsuario->getNickName(); ?><br><br>
+
         </div>
 
-        <div class="participante-card">
+        <div>
             <strong>Nombre:</strong>
-            <?php echo $datosUsuario->getNombre(); ?>
+            <?php echo $datosUsuario->getNombre(); ?><br><br>
+
         </div>
 
-        <div class="participante-card">
+        <div>
             <strong>Apellido:</strong>
-            <?php echo $datosUsuario->getApellido(); ?>
+            <?php echo $datosUsuario->getApellido(); ?><br><br>
         </div>
 
-        <div class="participante-card">
+        <div>
             <strong>Email:</strong>
-            <?php echo $datosUsuario->getEmail(); ?>
+            <?php echo $datosUsuario->getEmail(); ?><br><br>
         </div>
 
-        <div class="participante-card">
+        <div>
             <strong>Edad:</strong>
-            <?php echo $datosUsuario->getEdad(); ?>
+            <?php echo $datosUsuario->getEdad(); ?><br><br>
         </div>
+
+        <?php
+        
+        $rankPromedio = $datosUsuario->getRankPromedio(); 
+
+        
+        if ($rankPromedio >= 0 && $rankPromedio < 3) 
+        {
+            $claseColor = "rank-rojo";
+        } 
+        elseif ($rankPromedio >= 3 && $rankPromedio < 5) 
+        {
+            $claseColor = "rank-verde";
+        } 
+        elseif ($rankPromedio == 5) 
+        {
+            $claseColor = "rank-azul";
+        } 
+        else 
+        {
+            $claseColor = ""; 
+        }
+        ?>
+
+        <strong>Puntaje de la comunidad: 
+            <span class="<?php echo $claseColor; ?>">
+                <strong><?php echo $rankPromedio; ?></strong>
+            </span> 
+        </strong>
+        <i> <?php echo '(' . $cantidadVotos . ") votos"; ?> </i>
+        <br><br>
 
         <div class="participante-card">
             <form action="../control/controller.php" method="post">
@@ -116,7 +153,7 @@ if(empty($_SESSION['nickName']))
                     class="btn-regresar"
                     style="margin-top:10px;"
                 >
-                    Guardar Link
+                    Actualizar Link
                 </button>
             </form>
         </div>
