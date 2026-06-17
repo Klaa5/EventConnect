@@ -64,10 +64,14 @@ if(empty($_SESSION['nickName']))
 
     <main class="main-content">
 
-    <form action="../control/controller.php" method="post">
-        <input type="text" name="palabraBusqueda">   
-        <input type="submit" value="Buscar Sala" name="action"> 
+    <div class="search-container">
+    <form action="../control/controller.php" method="post" class="search-form">
+        <input type="text" name="palabraBusqueda" placeholder="Buscar sala..." class="input-eventconnect" required>   
+        <button type="submit" name="action" value="Buscar Sala" class="btn-search">
+            Buscar
+        </button> 
     </form>
+    </div>
 
         <div class="glass-card">
 
