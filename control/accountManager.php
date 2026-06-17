@@ -2,6 +2,7 @@
     include_once "../database/accesoBD/usuarioBD.php";
     include_once "../database/conexion.php";
     include_once "../objetos/usuario.php";
+    include_once "./rankManager.php";
     
     class accountManager
     {
@@ -29,52 +30,43 @@
         {
             return $this->accesoUserBD->obtenerDatosUsuario($nickName, $this->conexion);
         }
+
         public function actualizarLink($nickName, $link)
         {
-            $consulta = "UPDATE Usuario SET Link = ? WHERE nickname = ?";
-
-            $stmt = $this->conexion->prepare($consulta);
-            $stmt->bind_param("ss", $link, $nickName);
-            $stmt->execute();
-            $stmt->close();
-            return true;
+            return $this->accesoUserBD->actualizarLink($nickName, $link, $this->conexion);
         }
-       public function generarTokenVerificacion($nickName)
+
+        public function generarTokenVerificacion($nickName)
         {
-            $token = bin2hex(random_bytes(2));
-
-            $consulta = "
-                UPDATE Usuario
-                SET Token = ?
-                WHERE nickname = ?
-            ";
-
-            $stmt = $this->conexion->prepare($consulta);
-            $stmt->bind_param("ss", $token, $nickName);
-            $stmt->execute();
-            $stmt->close();
-
-            return $token;
+            return $this->accesoUserBD->generarTokenVerificacion($nickName, $this->conexion);
         }
+        
         public function verificarUsuario($token)
         {
-            $consulta = "
-                UPDATE Usuario
-                SET verifiedUser = 1,
-                    Token = NULL
-                WHERE Token = ?
-            ";
-
-            $stmt = $this->conexion->prepare($consulta);
-            $stmt->bind_param("s", $token);
-            $stmt->execute();
-
-            $filas = $stmt->affected_rows;
-
-            $stmt->close();
-
-            return $filas > 0;
+            return $this->accesoUserBD->verificarUsuario($token, $this->conexion);
         }
+
+        public function actualizarRankPromedio($nickName)
+        {
+            $rankManager = new RankManager();
+
+            $ranksUser = $rankManager->obtenerRanksUser($nickName);
+            
+            $cantidadRanks = count($ranksUser); //Cantidad de votaciones recibidas
+
+            $sumaRanks = 0;
+
+            foreach($ranksUser as $rank)
+            {
+                $sumaRanks = $sumaRanks + $rank->getPuntaje();
+            }
+
+            $promedioRank = $sumaRanks / $cantidadRanks; 
+
+            return $this->accesoUserBD->actualizarRankPromedio($nickName, $this->conexion, $promedioRank);
+
+        }
+
     }
    
     
