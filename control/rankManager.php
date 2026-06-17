@@ -40,7 +40,7 @@
         {
             //True fue evaluado
             //False no fue evaluado
-            return $this->evaluado($this->conexion, $nickNameEvaluado, $nickNameEvaluador, $idSala);
+            return $this->accesoRankBD->evaluado($this->conexion, $nickNameEvaluado, $nickNameEvaluador, $idSala);
         }
 
     }
