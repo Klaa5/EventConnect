@@ -88,6 +88,57 @@ include_once "../objetos/sala.php";
 
         }
 
+        public function getSalasFiltradas($conexion, $ingreso)
+        {
+            $textoRecortado = trim($ingreso);               //Limpia espacios de los bordes
+
+            $arrayPalabras = explode(' ', $textoRecortado); //Separo cada palabra 
+
+            $listaFiltrada = array_filter($arrayPalabras);  //Elimina string colados vacios
+
+            if(!empty($listaFiltrada))     //Si la string no llega vacia
+            {
+                $partesRelevancia = [];
+                $tipos = '';
+                $valores = [];
+
+                foreach($listaFiltrada as $palabra) 
+                {
+                    $like = "%{$palabra}%";
+                    $partesRelevancia[] = "(Sala.Titulo LIKE ? OR Sala.Descripcion LIKE ?)";
+                    $tipos .= 'ss';
+                    $valores[] = $like;
+                    $valores[] = $like;
+                }
+
+                $relevancia = implode(' + ', $partesRelevancia);
+
+                $consulta = "SELECT Sala.*, ({$relevancia}) AS coincidencias FROM Sala HAVING coincidencias > 0 ORDER BY coincidencias DESC, Sala.Titulo ASC LIMIT ?";
+                $tipos .= 'i';
+
+                $valores[] = 20;
+
+                $instruccion = $conexion->prepare($consulta);
+                $instruccion->bind_param($tipos, ...$valores);
+                $instruccion->execute();
+                
+                $resultado = $instruccion->get_result();
+
+                if($resultado->num_rows != 0)   //Si la consulta encuentra algo
+                {
+                    return $resultado;
+                }
+                else
+                {
+                    return null;
+                }
+                    
+            }
+
+            return null;
+
+        }
+
     }
 
 
