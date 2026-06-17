@@ -46,6 +46,10 @@ session_start();
 
 <?php
     include_once "../control/salaContentManager.php";
+    include_once "../control/accountManager.php";
+    include_once "../control/rankManager.php";
+
+    $accountManager = new accountManager();
 
     if(!isset($_GET['idSala']))
     {
@@ -59,6 +63,7 @@ session_start();
     }
 
     $salaContentManager = new SalaContentManager($_GET['idSala']);
+    $rankManager = new RankManager();
     $sala = $salaContentManager->obtenerSala($_GET['idSala']);
 
     if($_GET['action'] == 'error')
@@ -140,60 +145,90 @@ if(
     $creador = $sala->getNickNameCreador();
     ?>
 
-    <div
-        class="participante-card"
-        onclick="window.location.href='userProfile.php?nickName=<?php echo urlencode($creador); ?>'"
-        style="cursor:pointer;"
-    >
-        <strong><?php echo $creador; ?></strong> (Creador)
+    <div class="participante-card" onclick="window.location.href='userProfile.php?nickName=<?php echo urlencode($creador); ?>'" style="cursor:pointer;">
+        <strong><?php echo $creador; ?></strong> (Creador) 
+        <?php $datos = $accountManager->obtenerDatosUsuario($creador);
+            echo "<i>(" . $datos->getRankPromedio() . ")</i>";
+        ?>
     </div>
 
     <?php
     foreach($sala->getParticipantes() as $participante)
     {
+
     ?>
         <div
             class="participante-card"
             onclick="window.location.href='userProfile.php?nickName=<?php echo urlencode($participante); ?>'"
-            style="cursor:pointer;"
+            style="cursor:pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px;"
         >
-            <?php echo $participante; ?>
+            <span>
+                <?php 
+                    $datos = $accountManager->obtenerDatosUsuario($participante);
+                    echo $participante . " <i>(" . $datos->getRankPromedio() . ")</i>" ;
+                ?>
+            </span>
 
-            <?php
-            if($_SESSION['nickName'] == $sala->getNickNameCreador())
-            {
+            <?php 
+            if ($sala->getEstado() == 'FINALIZADA') 
+            {    
+                // Si esta finalizada
+                if ($_SESSION['nickName'] != $participante && !$rankManager->evaluado($participante,$_SESSION['nickName'],$sala->getIdSala())) 
+                {
             ?>
-                <form action="../control/controller.php" method="POST" onclick="event.stopPropagation();">
+                    <form action="../control/controller.php" method="POST" onclick="event.stopPropagation();" style="margin: 0; display: flex; gap: 5px; align-items: center;">
+                        <input type="hidden" name="idSala" value="<?php echo $sala->getIdSala(); ?>">
+                        <input type="hidden" name="nickNameEvaluado" value="<?php echo trim($participante); ?>">
+                        
+                        <input 
+                            type="number" 
+                            name="puntaje" 
+                            step="1" 
+                            min="0" 
+                            max="5" 
+                            placeholder="0"
+                            required
+                            style="width: 50px; padding: 3px; font-size: 12px; text-align: center;"
+                        >
 
-                    <input
-                        type="hidden"
-                        name="idSala"
-                        value="<?php echo $sala->getIdSala(); ?>"
-                    >
+                        <button
+                            class="btn-votar-chico"
+                            type="submit"
+                            name="action"
+                            value="Calificar"
+                        >
+                            Calificar participante
+                        </button>
+                    </form>
+            <?php 
+                } 
+            } 
+            // Caso sala en preparacion
+            else {
+                if($_SESSION['nickName'] == $sala->getNickNameCreador()) {
+            ?>
+                    <form action="../control/controller.php" method="POST" onclick="event.stopPropagation();" style="margin: 0;">
+                        <input type="hidden" name="idSala" value="<?php echo $sala->getIdSala(); ?>">
+                        <input type="hidden" name="nickName" value="<?php echo trim($participante); ?>">
 
-                    <input
-                        type="hidden"
-                        name="nickName"
-                        value="<?php echo $participante; ?>"
-                    >
-
-                    <button
-                        class="btn-logout"
-                        type="submit"
-                        name="action"
-                        value="Eliminar Participante"
-                    >
-                        Eliminar Participante
-                    </button>
-
-                </form>
+                        <button
+                            class="btn-logout btn-eliminar-chico"
+                            type="submit"
+                            name="action"
+                            value="Eliminar Participante"
+                        >
+                            X
+                        </button>
+                    </form>
             <?php
+                }
             }
             ?>
         </div>
     <?php
     }
-    ?>
+?>
+
 
 </div>
 
