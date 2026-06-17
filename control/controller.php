@@ -95,38 +95,92 @@
     header("Location: ../paginas/userProfile.php?nickName=".$nickName);
     exit();
     }
-
-    //_____________________________________________
-    //_______________SALA O HOME___________________
-
-
-    if($_POST["action"] == "Crear Sala")    //Crear sala.
+    if($_POST['action'] == 'Enviar Verificacion')
     {
-        if(!empty($_SESSION['nickName']))
-        {
-            $salaManager = new SalaManager($_SESSION['nickName']);
-            
-            if($salaManager->crearSala($_POST))
-            {
-                //PENDIENTE VER COMO DAR UN MENSAJE DE SUCCESS
-                header("Location: ../paginas/paginaPrincipal.php"); //redirige a la pagina principal si todo sale bien
-                exit();
-            }
-            else
-            {
-                //PENDIENTE VER COMO DAR MENSAJE DE ERROR  
-                header("Location: ../paginas/crearSala.php");   //vuelve a la pagina de creacion a reintentar.
-                exit();
-            }
+        $accountManager = new accountManager();
 
+        $nickName = $_POST['nickName'];
+
+        $token = $accountManager->generarTokenVerificacion($nickName);
+
+        $datosUsuario = $accountManager->obtenerDatosUsuario($nickName);
+
+        $email = $datosUsuario->getEmail();
+
+        $link = "http://localhost/EventConnect/control/verificacion.php?token=".$token;
+
+        $asunto = "Verificacion de cuenta EventConnect";
+
+        $mensaje = "
+        <html>
+        <head>
+            <title>Verificacion</title>
+        </head>
+        <body>
+
+            <h2>Verifica tu cuenta</h2>
+
+            <p>
+                Haz clic en el siguiente enlace:
+            </p>
+
+            <a href='$link'>
+                Verificar cuenta
+            </a>
+
+        </body>
+        </html>
+        ";
+
+        $headers = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=UTF-8\r\n";
+        $headers .= "From: EventConnect <admin@equipo.dos>\r\n";
+        $headers .= "Reply-To: admin@equipo.dos\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion();
+
+        if(mail($email, $asunto, $mensaje, $headers))
+        {
+            header("Location: ../paginas/userProfile.php?nickName=".$nickName);
+            exit();
         }
         else
         {
-            header("Location: ../paginas/login.php");
+            header("Location: ../paginas/userProfile.php?nickName=".$nickName."&action=error");
             exit();
         }
-       
+        exit();
     }
+        //_____________________________________________
+        //_______________SALA O HOME___________________
+
+
+        if($_POST["action"] == "Crear Sala")    //Crear sala.
+        {
+            if(!empty($_SESSION['nickName']))
+            {
+                $salaManager = new SalaManager($_SESSION['nickName']);
+                
+                if($salaManager->crearSala($_POST))
+                {
+                    //PENDIENTE VER COMO DAR UN MENSAJE DE SUCCESS
+                    header("Location: ../paginas/paginaPrincipal.php"); //redirige a la pagina principal si todo sale bien
+                    exit();
+                }
+                else
+                {
+                    //PENDIENTE VER COMO DAR MENSAJE DE ERROR  
+                    header("Location: ../paginas/crearSala.php");   //vuelve a la pagina de creacion a reintentar.
+                    exit();
+                }
+
+            }
+            else
+            {
+                header("Location: ../paginas/login.php");
+                exit();
+            }
+        
+        }
 
     //_____________________________________________
     //_______________DENTRO SALA___________________

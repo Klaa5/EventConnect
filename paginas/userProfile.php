@@ -40,7 +40,7 @@ if(empty($_SESSION['nickName']))
 
     <div class="sidebar-user">
         Usuario:<br>
-        <strong><?php echo $datosUsuario->getNickName(); ?></strong>
+        <strong><?php echo $_SESSION['nickName']; ?></strong>
     </div>
 
     <form action="./paginaPrincipal.php" method="post">
@@ -127,12 +127,31 @@ if(empty($_SESSION['nickName']))
 
         if($datosUsuario->getVerifiedUser())
         {
-            echo "<p style='color:#4ade80;'>✓ Usuario verificado</p>";
+            echo "<p style='color:#4ade80;'> Usuario verificado</p>";
         }
         else
         {
-            echo "<p style='color:#ff6b6b;'>✗ Usuario no verificado</p>";
-            echo "<button class='btn-sidebar'>Verificar con Email</button>";
+            echo "<p style='color:#ff6b6b;'> Usuario no verificado</p>";
+            ?>
+        <form action="../control/controller.php" method="POST">
+
+            <input
+                type="hidden"
+                name="nickName"
+                value="<?php echo $_SESSION['nickName']; ?>"
+            >
+
+            <button
+                class="btn-sidebar"
+                type="submit"
+                name="action"
+                value="Enviar Verificacion"
+            >
+                Verificar con Email
+            </button>
+
+        </form>
+        <?php
         }
 
         ?>
