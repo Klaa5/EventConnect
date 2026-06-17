@@ -111,7 +111,7 @@ include_once "../objetos/sala.php";
                     $valores[] = $like;
                 }
 
-                $relevancia = implode(' + ', $partesRelevancia);
+                $relevancia = implode(' + ', $partesRelevancia);    //Junto el array de importancia en un string solo
 
                 $consulta = "SELECT Sala.*, ({$relevancia}) AS coincidencias FROM Sala HAVING coincidencias > 0 ORDER BY coincidencias DESC, Sala.Titulo ASC LIMIT ?";
                 $tipos .= 'i';
@@ -121,7 +121,7 @@ include_once "../objetos/sala.php";
                 $instruccion = $conexion->prepare($consulta);
                 $instruccion->bind_param($tipos, ...$valores);
                 $instruccion->execute();
-                
+
                 $resultado = $instruccion->get_result();
 
                 if($resultado->num_rows != 0)   //Si la consulta encuentra algo
