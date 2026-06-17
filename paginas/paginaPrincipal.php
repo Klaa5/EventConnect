@@ -64,6 +64,11 @@ if(empty($_SESSION['nickName']))
 
     <main class="main-content">
 
+    <form action="../control/controller.php" method="post">
+        <input type="text" name="palabraBusqueda">   
+        <input type="submit" value="Buscar Sala" name="action"> 
+    </form>
+
         <div class="glass-card">
 
             <h1>Salas Disponibles</h1>
@@ -72,7 +77,15 @@ if(empty($_SESSION['nickName']))
                 include "../control/homeManager.php";
 
                 $homeManager = new HomeManager();
-                $homeManager->mostrarSalas();
+                if(empty($_GET['search']))
+                {
+                    $homeManager->mostrarSalas();
+                }
+                else
+                {
+                    $homeManager->buscarSala($_GET['search']);
+                }
+                
             ?>
 
         </div>

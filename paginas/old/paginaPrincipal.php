@@ -33,6 +33,12 @@ session_start();
     <form action="../control/controller.php" method="post">
         <input type="submit" value="Cerrar Sesión" name="action">
     </form>
+    <hr>
+
+    <form action="buscarSala" method="get">
+        <input type="text" name="palabraBusqueda">   
+        <input type="button" value="Buscar Sala" name="action"> 
+    </form>
     
     <hr>
     <h3>Salas disponibles:</h3>
