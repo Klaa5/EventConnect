@@ -262,6 +262,9 @@
             $accountManager->actualizarRankPromedio($_POST['nickNameEvaluado']);    
         }
 
+        header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala']);
+        exit();
+
     } 
 
 
