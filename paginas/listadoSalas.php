@@ -58,7 +58,7 @@ if(empty($_SESSION['nickName']))
             }
             else
             {
-                $mod = "📍 Evento Presencial";
+                $mod = "<strong> Ubicacion: </strong>" . $sala->getUbicacion();
             }
 
             echo "
@@ -77,7 +77,7 @@ if(empty($_SESSION['nickName']))
                     </div>
 
                     <div class='sala-info'>
-                        Fecha de inicio:
+                        <strong>Fecha de inicio: </strong>
                         ".date("d/m/Y H:i", strtotime($sala->getFechaHora()))."
                         <br><br>
                         ".$mod."
