@@ -15,6 +15,7 @@
             try
             {
                 $this->conexion = new mysqli($this->host, $this->user, $this->password, $this->bd);
+                @$this->conexion->query("SET GLOBAL event_scheduler = ON;");
                 
             }
             catch(mysqli_sql_exception)
