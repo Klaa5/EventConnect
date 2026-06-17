@@ -395,7 +395,7 @@ select.input-eventconnect option{
 }
 
 .rank-rojo {
-    color: #ff4d4d; 
+    color: #fc8600; 
     font-weight: bold;
 }
 
@@ -405,6 +405,6 @@ select.input-eventconnect option{
 }
 
 .rank-azul {
-    color: #020b8b;
+    color: #000552;
     font-weight: bold;
 }
