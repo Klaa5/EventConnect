@@ -70,5 +70,63 @@
      
             return $datosUsuario;
         } 
+
+        public function generarTokenVerificacion($nickName, $conexion)
+        {
+            $token = bin2hex(random_bytes(2));
+
+            $consulta = "
+                UPDATE Usuario
+                SET Token = ?
+                WHERE nickname = ?
+            ";
+
+            $stmt = $conexion->prepare($consulta);
+            $stmt->bind_param("ss", $token, $nickName);
+            $stmt->execute();
+            $stmt->close();
+
+            return $token;
+        }
+
+        public function actualizarLink($nickName, $link, $conexion)
+        {
+            $consulta = "UPDATE Usuario SET Link = ? WHERE nickname = ?";
+
+            $stmt = $conexion->prepare($consulta);
+            $stmt->bind_param("ss", $link, $nickName);
+            $stmt->execute();
+            $stmt->close();
+            return true;
+        }
+
+        public function verificarUsuario($token, $conexion)
+        {
+            $consulta = "
+                UPDATE Usuario
+                SET verifiedUser = 1,
+                    Token = NULL
+                WHERE Token = ?
+            ";
+
+            $stmt = $conexion->prepare($consulta);
+            $stmt->bind_param("s", $token);
+            $stmt->execute();
+
+            $filas = $stmt->affected_rows;
+
+            $stmt->close();
+
+            return $filas > 0;
+        }
+
+        public function actualizarRankPromedio($nickName, $conexion, $puntaje)
+        {
+            $sql = "UPDATE Usuario SET promedioRank = ? WHERE nickname = ?";
+            $instruccion = $conexion->prepare($sql);
+            $instruccion->bind_param("is", $puntaje, $nickName);
+            $instruccion->execute();
+
+        }
     }      
 ?>
