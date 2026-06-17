@@ -4,6 +4,7 @@
     include_once "../control/salaManager.php";
     include_once "../control/salaContentManager.php";
     include_once "../database/accesoBD/salaBD.php";
+    include_once "../control/homeManager.php";
     date_default_timezone_set("America/Montevideo");
 
     //____________________________________________________________________________________
@@ -86,15 +87,17 @@
         header("Location: ../paginas/login.php");
         exit();
     }
+
     if($_POST['action'] == "Actualizar Link")
     {
-    $nickName = $_POST['nickName'];
-    $link = $_POST['link'];
-    $accountManager = new accountManager();
-    $accountManager->actualizarLink($nickName, $link);
-    header("Location: ../paginas/userProfile.php?nickName=".$nickName);
-    exit();
+        $nickName = $_POST['nickName'];
+        $link = $_POST['link'];
+        $accountManager = new accountManager();
+        $accountManager->actualizarLink($nickName, $link);
+        header("Location: ../paginas/userProfile.php?nickName=".$nickName);
+        exit();
     }
+
     if($_POST['action'] == 'Enviar Verificacion')
     {
         $accountManager = new accountManager();
@@ -107,7 +110,7 @@
 
         $email = $datosUsuario->getEmail();
 
-        $link = "http://localhost/EventConnect/control/verificacion.php?token=".$token;
+        $link = "http://localhost/EventConnect/paginas/verificacion.php?token=".$token;
 
         $asunto = "Verificacion de cuenta EventConnect";
 
@@ -150,37 +153,48 @@
         }
         exit();
     }
-        //_____________________________________________
-        //_______________SALA O HOME___________________
 
 
-        if($_POST["action"] == "Crear Sala")    //Crear sala.
+    //_____________________________________________
+    //_______________SALA O HOME___________________
+
+
+    if($_POST["action"] == "Crear Sala")    //Crear sala.
+    {
+        if(!empty($_SESSION['nickName']))
         {
-            if(!empty($_SESSION['nickName']))
+            $salaManager = new SalaManager($_SESSION['nickName']);
+            
+            if($salaManager->crearSala($_POST))
             {
-                $salaManager = new SalaManager($_SESSION['nickName']);
-                
-                if($salaManager->crearSala($_POST))
-                {
-                    //PENDIENTE VER COMO DAR UN MENSAJE DE SUCCESS
-                    header("Location: ../paginas/paginaPrincipal.php"); //redirige a la pagina principal si todo sale bien
-                    exit();
-                }
-                else
-                {
-                    //PENDIENTE VER COMO DAR MENSAJE DE ERROR  
-                    header("Location: ../paginas/crearSala.php");   //vuelve a la pagina de creacion a reintentar.
-                    exit();
-                }
-
+                //PENDIENTE VER COMO DAR UN MENSAJE DE SUCCESS
+                header("Location: ../paginas/paginaPrincipal.php"); //redirige a la pagina principal si todo sale bien
+                exit();
             }
             else
             {
-                header("Location: ../paginas/login.php");
+                //PENDIENTE VER COMO DAR MENSAJE DE ERROR  
+                header("Location: ../paginas/crearSala.php");   //vuelve a la pagina de creacion a reintentar.
                 exit();
             }
-        
+
         }
+        else
+        {
+            header("Location: ../paginas/login.php");
+            exit();
+        }
+        
+    }
+
+    if($_POST["action"] == "Buscar Sala")
+    {
+        if(!empty($_POST["palabraBusqueda"]))
+        {
+            header("Location: ../paginas/paginaPrincipal.php?search=" . $_POST["palabraBusqueda"]);
+            exit();
+        }
+    }
 
     //_____________________________________________
     //_______________DENTRO SALA___________________
