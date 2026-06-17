@@ -8,12 +8,17 @@ class rank
     private $idSala;
     private $puntaje;
 
-    public function __construct($idRank, $nickNameEvaluado, $nickNameEvaluador, $idSala)
+    public function __construct($idRank, $nickNameEvaluado, $nickNameEvaluador, $idSala, $puntaje)
     {
         $this->idRank = $idRank;
         $this->nickNameEvaluado = $nickNameEvaluado;
         $this->nickNameEvaluador = $nickNameEvaluador;
         $this->idSala = $idSala;
+        
+        if($puntaje == null)
+        {
+            $this->puntaje = 0;
+        }
     }
 
     public function getIdRank()
