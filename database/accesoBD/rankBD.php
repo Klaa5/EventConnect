@@ -1,6 +1,6 @@
 <?php
-
-    class rankBD
+    
+    class RankBD
     {
 
         public function obtenerRanksUser($conexion, $nickName)
