@@ -349,3 +349,47 @@ select.input-eventconnect option{
     background:rgba(255,255,255,.20);
     transform:translateY(-2px);
 }
+
+.search-container {
+    margin-bottom: 25px; 
+    display: flex;
+    justify-content: flex-start; 
+}
+
+.search-form {
+    display: flex;
+    gap: 12px; 
+    width: 100%;
+    max-width: 500px; 
+}
+
+.search-form .input-eventconnect {
+    flex: 1;
+}
+
+.btn-search {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 12px; 
+    background: var(--primary); /* Tu azul */
+    color: white;
+    font-family: var(--font-main);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+
+.search-form:not(:invalid) .btn-search:hover {
+    background: rgba(13, 110, 253, 0.85); 
+    transform: translateY(-2px);
+}
+
+
+.search-form:invalid .btn-search {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.3);
+    cursor: not-allowed; 
+    pointer-events: none; 
+    transform: none;
+}
