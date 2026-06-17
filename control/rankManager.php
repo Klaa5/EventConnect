@@ -24,7 +24,7 @@
 
             while($rank = $allUserRanks->fetch_assoc()) 
             {
-                $ArrayRanks = new rank($rank['id_Rank'], $rank['nicknameEvaluado'], $rank['nicknameEvaluador'], $rank['Id_sala'], $rank['Puntaje'] );
+                $ArrayRanks[] = new rank($rank['id_Rank'], $rank['nicknameEvaluado'], $rank['nicknameEvaluador'], $rank['Id_sala'], $rank['Puntaje'] );
             }
 
             return $ArrayRanks;
