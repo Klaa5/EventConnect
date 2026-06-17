@@ -3,8 +3,9 @@
     include_once "../control/accountManager.php";
     include_once "../control/salaManager.php";
     include_once "../control/salaContentManager.php";
-    include_once "../database/accesoBD/salaBD.php";
     include_once "../control/homeManager.php";
+    include_once "../control/rankManager.php";
+
     date_default_timezone_set("America/Montevideo");
 
     //____________________________________________________________________________________
@@ -57,7 +58,7 @@
         //verifico que no deje vacio y que esa cuenta no exista.
         if(!empty($_POST["nickNameReg"]) && !empty($_POST["passwordReg"]) && !$accountManager->buscarCuenta($_POST['nickNameReg'], "", 1))
         {
-            $usuario = new Usuario($_POST['nickNameReg'], $_POST['passwordReg'], $_POST['nombreUser'], $_POST['apellidoUser'], $_POST['emailUser'], $_POST['edadUser'], null, false);
+            $usuario = new Usuario($_POST['nickNameReg'], $_POST['passwordReg'], $_POST['nombreUser'], $_POST['apellidoUser'], $_POST['emailUser'], $_POST['edadUser'], null, false, null);
             
             if($accountManager->registrarUser($usuario))
             {
@@ -249,6 +250,19 @@
             exit();
         }
     }
+
+    if($_POST["action"] == "Calificar")
+    {
+        $rankManager = new RankManager();
+        $accountManager = new accountManager();
+
+        if(!$rankManager->evaluado($_POST['nickNameEvaluado'], $_SESSION['nickName'], $_POST['idSala']))
+        {   
+            $rankManager->agregarRank($_SESSION['nickName'], $_POST['nickNameEvaluado'], $_POST['puntaje'], $_POST['idSala']);
+            $accountManager->actualizarRankPromedio($_POST['nickNameEvaluado']);    
+        }
+
+    } 
 
 
 ?>
