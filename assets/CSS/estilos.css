@@ -393,3 +393,18 @@ select.input-eventconnect option{
     pointer-events: none; 
     transform: none;
 }
+
+.rank-rojo {
+    color: #ff4d4d; 
+    font-weight: bold;
+}
+
+.rank-verde {
+    color: #2ecc71; 
+    font-weight: bold;
+}
+
+.rank-azul {
+    color: #020b8b;
+    font-weight: bold;
+}
