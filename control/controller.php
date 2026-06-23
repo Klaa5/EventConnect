@@ -110,7 +110,7 @@
 
         $email = $datosUsuario->getEmail();
 
-        $link = "http://localhost/EventConnect/paginas/verificacion.php?token=".$token;
+        $link = "https://sitio.tec.dos/paginas/verificacion.php?token=".$token;
 
         $asunto = "Verificacion de cuenta EventConnect";
 
