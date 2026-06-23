@@ -80,6 +80,46 @@ session_start();
         header("Location: paginaPrincipal.php");
         exit();
     }
+
+    if(isset($_GET['notif_id']))
+    {
+        if($_GET['notif_id'] == "success")
+        {
+        ?>
+            <div class="toast toast-spec">
+                <?= htmlspecialchars("Expulsado el usuario " . $_GET['usr'] . " de la sala" ) ?>
+            </div>            
+        <?php
+        }
+
+        if($_GET['notif_id'] == "error")
+        {
+        ?>
+            <div class="toast toast-spec">
+                <?= htmlspecialchars("No se pudo realizar la accion, intente nuevamente") ?>
+            </div>            
+        <?php
+        }
+
+        if($_GET['notif_id'] == "joined")
+        {
+        ?>
+            <div class="toast toast-spec">
+                <?= htmlspecialchars("Ahora participas en esta sala") ?>
+            </div>            
+        <?php
+        }
+
+        if($_GET['notif_id'] == "rankedSucess")
+        {
+        ?>
+            <div class="toast toast-spec">
+                <?= htmlspecialchars("Calificacion enviada a usuario " . $_GET['usr'] . " correctamente") ?>
+            </div>            
+        <?php
+        }
+
+    }
 ?>
 
 <h1><?php echo $sala->getTitulo(); ?></h1>
