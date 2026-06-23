@@ -18,7 +18,33 @@ session_start();
     <link rel="icon" type="image/png" href="../assets/EventConnect.png">
 </head>
 <body>
+<?php
 
+
+    if(isset($_GET['notif_id']))
+    {
+        if($_GET['notif_id'] == "errorLogin")
+        {
+?>
+            <div class="toast toast-error">
+                <?= htmlspecialchars("Usuario o contraseña incorrectos") ?>
+            </div>
+<?php
+        }
+
+        if($_GET['notif_id'] == "errorReg")
+        {
+?>
+            <div class="toast toast-error">
+                <?= htmlspecialchars("Error al registrarse, revise los datos ingresados") ?>
+            </div>
+<?php
+        }
+
+
+    }
+
+?>
 <div class="login-container">
 
     <div class="glass-card login-card">
@@ -51,8 +77,6 @@ session_start();
                         name="password"
                         id="password"
                     >
-
-                    <br>
 
                     <input
                         class="btn-login"
