@@ -95,9 +95,7 @@
 
             $stmt = $conexion->prepare($consulta);
             $stmt->bind_param("ss", $link, $nickName);
-            $stmt->execute();
-            $stmt->close();
-            return true;
+            return $stmt->execute();
         }
 
         public function verificarUsuario($token, $conexion)
@@ -125,7 +123,7 @@
             $sql = "UPDATE Usuario SET promedioRank = ? WHERE nickname = ?";
             $instruccion = $conexion->prepare($sql);
             $instruccion->bind_param("ds", $puntaje, $nickName);
-            $instruccion->execute();
+            return $instruccion->execute();
 
         }
     }      
