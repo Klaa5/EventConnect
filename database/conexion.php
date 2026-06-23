@@ -4,9 +4,9 @@
     class Conexion
     {
         private $host = "localhost";
-        private $user = "user";
-        private $password = "user123";
-        private $bd = "EventConnect";
+        private $user = "sitio_equipodos";
+        private $password = "equipodos";
+        private $bd = "sitio_EventConnect";
         private $conexion;  
 
 
@@ -15,7 +15,6 @@
             try
             {
                 $this->conexion = new mysqli($this->host, $this->user, $this->password, $this->bd);
-                @$this->conexion->query("SET GLOBAL event_scheduler = ON;");
                 
             }
             catch(mysqli_sql_exception)
