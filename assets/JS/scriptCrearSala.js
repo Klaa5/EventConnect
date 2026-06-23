@@ -5,7 +5,7 @@ const ubicacion = document.getElementById("ubicacion");
 
 function actualizarUbicacion()
 {
-    if(modalidad.value === "Virtual")
+    if(modalidad.value === "virtual")
     {
         ubicacionDiv.style.display = "none";
         ubicacion.required = false;
