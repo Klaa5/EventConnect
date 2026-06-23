@@ -61,7 +61,7 @@ if(empty($_SESSION['nickName']))
                     name="modalidad"
                     id="modalidad"
                 >
-                    <option value="Virtual">Virtual</option>
+                    <option value="virtual">Virtual</option>
                     <option value="En Persona">En persona</option>
                 </select>
 
