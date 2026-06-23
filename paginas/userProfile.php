@@ -46,6 +46,24 @@ if(empty($_SESSION['nickName']))
 <?php
         }
 
+        if($_GET['notif_id'] == "correoVerifEnviado")
+        {
+?>
+            <div class="toast toast-spec">
+                <?= htmlspecialchars("Link de notificacion enviado, revise su casilla de eMail") ?>
+            </div>            
+<?php
+        }
+
+        if($_GET['notif_id'] == "correoVerifError")
+        {
+?>
+            <div class="toast toast-spec">
+                <?= htmlspecialchars("Error al enviar link de verificacion, intente nuevamente") ?>
+            </div>            
+<?php
+        }
+
     }
 
 
