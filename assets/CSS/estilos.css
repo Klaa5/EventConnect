@@ -431,3 +431,45 @@ select.input-eventconnect option{
 .btn-votar-chico:hover {
     background-color: #2980b9;
 }
+
+.toast
+{
+    position:fixed;
+    top:25px;
+    right:25px;
+
+    min-width:280px;
+    padding:18px 22px;
+
+    color:white;
+    background:var(--glass-bg-strong);
+    backdrop-filter:blur(15px);
+
+    border:1px solid var(--glass-border);
+    border-radius:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+    animation:entrada-toast .3s ease;
+    z-index:9999;
+}
+
+.toast-spec
+{
+    border-left:5px ;
+}
+
+@keyframes entrada-toast
+{
+    from
+    {
+        opacity:0;
+        transform:translateY(-20px);
+    }
+
+    to
+    {
+        opacity:1;
+        transform:translateY(0);
+    }
+}
