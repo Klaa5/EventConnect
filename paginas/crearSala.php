@@ -18,6 +18,7 @@ if(empty($_SESSION['nickName']))
     <link rel="icon" type="image/png" href="../assets/EventConnect.png">
     <link rel="stylesheet" href="../assets/CSS/estilos.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="../assets/JS/scriptCrearSala.js" defer></script>
 </head>
 
 <body>
@@ -58,19 +59,24 @@ if(empty($_SESSION['nickName']))
                 <select
                     class="input-eventconnect"
                     name="modalidad"
+                    id="modalidad"
                 >
                     <option value="Virtual">Virtual</option>
                     <option value="En Persona">En persona</option>
                 </select>
 
-                <label for="ubicacion">Ubicación</label>
-                <input
-                    class="input-eventconnect"
-                    type="text"
-                    name="ubicacion"
-                    id="ubicacion"
-                    required
-                >
+                <div id="ubicacionDiv">
+
+                    <label for="ubicacion">Ubicación</label>
+                    <input
+                        class="input-eventconnect"
+                        type="text"
+                        name="ubicacion"
+                        id="ubicacion"
+                        required
+                    >
+
+                </div>
 
                 <label for="fechaHora">Fecha a realizar</label>
                 <input
