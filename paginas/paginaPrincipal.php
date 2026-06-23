@@ -20,6 +20,32 @@ if(empty($_SESSION['nickName']))
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
+<?php
+
+    if(isset($_GET['notif_id']))
+    {
+        if($_GET['notif_id'] == "salaCreada")
+        {
+?>
+            <div class="toast toast-spec">
+                <?= htmlspecialchars("Sala creada correctamente") ?>
+            </div>            
+<?php
+        }
+
+        if($_GET['notif_id'] == "salaCreadaError")
+        {
+?>
+            <div class="toast toast-spec">
+                <?= htmlspecialchars("No se pudo crear la sala, intente nuevamente") ?>
+            </div>            
+<?php
+        }
+
+    }
+?>
+
+
 <body>
 
     <aside class="sidebar">
