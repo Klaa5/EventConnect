@@ -26,7 +26,7 @@ session_start();
         if($_GET['notif_id'] == "errorLogin")
         {
 ?>
-            <div class="toast toast-error">
+            <div class="toast toast-spec">
                 <?= htmlspecialchars("Usuario o contraseña incorrectos") ?>
             </div>
 <?php
@@ -35,7 +35,7 @@ session_start();
         if($_GET['notif_id'] == "errorReg")
         {
 ?>
-            <div class="toast toast-error">
+            <div class="toast toast-spec">
                 <?= htmlspecialchars("Error al registrarse, revise los datos ingresados") ?>
             </div>
 <?php
