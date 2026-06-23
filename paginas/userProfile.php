@@ -33,6 +33,24 @@ if(empty($_SESSION['nickName']))
     $datosUsuario = $accountManager->obtenerDatosUsuario($userData);
     $ranksRecibidos = $rankManager->obtenerRanksUser($datosUsuario->getNickName());
     $cantidadVotos = count($ranksRecibidos);
+
+
+    if(isset($_GET['notif_id']))
+    {
+        if($_GET['notif_id'] == "datosActualizados")
+        {
+?>
+            <div class="toast toast-spec">
+                <?= htmlspecialchars("Link de perfil actualizado") ?>
+            </div>            
+<?php
+        }
+
+    }
+
+
+
+
 ?>
 
 <aside class="sidebar">
