@@ -143,12 +143,12 @@
 
         if(mail($email, $asunto, $mensaje, $headers))
         {
-            header("Location: ../paginas/userProfile.php?nickName=".$nickName);
+            header("Location: ../paginas/userProfile.php?nickName=".$nickName."&notif_id=correoVerifEnviado");
             exit();
         }
         else
         {
-            header("Location: ../paginas/userProfile.php?nickName=".$nickName."&action=error");
+            header("Location: ../paginas/userProfile.php?nickName=".$nickName."&notif_id=correoVerifError");
             exit();
         }
         exit();
@@ -159,7 +159,7 @@
     //_______________SALA O HOME___________________
 
 
-    if($_POST["action"] == "Crear Sala")    //Crear sala.
+    if($_POST["action"] == "Crear Sala")  
     {
         if(!empty($_SESSION['nickName']))
         {
@@ -167,14 +167,12 @@
             
             if($salaManager->crearSala($_POST))
             {
-                //PENDIENTE VER COMO DAR UN MENSAJE DE SUCCESS
-                header("Location: ../paginas/paginaPrincipal.php"); //redirige a la pagina principal si todo sale bien
+                header("Location: ../paginas/paginaPrincipal.php?notif_id=salaCreada");
                 exit();
             }
             else
-            {
-                //PENDIENTE VER COMO DAR MENSAJE DE ERROR  
-                header("Location: ../paginas/crearSala.php");   //vuelve a la pagina de creacion a reintentar.
+            { 
+                header("Location: ../paginas/crearSala.php?notif_id=salaCreadaError"); 
                 exit();
             }
 
@@ -206,12 +204,12 @@
         
         if($salaContentManager->agregarParticipante($_SESSION['nickName'], $_POST['idSala']))
         {//Si logra unirse
-            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala']);
+            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala'] . "&notif_id=joined");
             exit();
         }
         else
         {//Si hay error
-            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala'] . "&action=error");
+            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala'] . "&notif_id=error");
             exit();
         }
     }
@@ -222,12 +220,12 @@
         
         if($salaContentManager->eliminarParticipante($_POST['nickName'], $_POST['idSala']))
         {
-            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala']);
+            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala'] . "&notif_id=success&usr=" . $_POST['nickName']);
             exit();
         }
         else
         {
-            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala'] . "&action=error");
+            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala'] . "&nofif_id=error");
             exit();
         }
     }
@@ -258,11 +256,24 @@
         if(!$rankManager->evaluado($_POST['nickNameEvaluado'], $_SESSION['nickName'], $_POST['idSala']))
         {   
             $rankManager->agregarRank($_SESSION['nickName'], $_POST['nickNameEvaluado'], $_POST['puntaje'], $_POST['idSala']);
-            $accountManager->actualizarRankPromedio($_POST['nickNameEvaluado']);    
+            
+            if($accountManager->actualizarRankPromedio($_POST['nickNameEvaluado']))
+            {
+                header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala'] . "&notif_id=rankedSucess&usr=" . $_POST['nickNameEvaluado']);
+                exit();
+            }
+            else
+            {
+                header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala'] . "&notif_id=error");
+                exit();  
+            }   
         }
-
-        header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala']);
-        exit();
+        else
+        {
+            header("Location: ../paginas/visorSala.php?idSala=" . $_POST['idSala'] . "&notif_id=error");
+            exit();
+        }
+        
 
     } 
 
