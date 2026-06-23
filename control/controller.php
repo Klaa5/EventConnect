@@ -38,13 +38,13 @@
             }
             else
             {
-                header("Location: ../paginas/login.php");
+                header("Location: ../paginas/login.php?notif_id=errorLogin");
                 exit();
             }
         }
         else
         {
-            header("Location: ../paginas/login.php");
+            header("Location: ../paginas/login.php?notif_id=errorLogin");
             exit();
         }    
     }
@@ -67,15 +67,14 @@
             }
             else
             {
-                //PENDIENTE MANEJAR ERROR DE REGISTRO.
-                header("Location: ../paginas/login.php");
+                header("Location: ../paginas/login.php?notif_id=errorReg");
                 exit();
             }
 
         }
         else
         {
-            header("Location: ../paginas/login.php");
+            header("Location: ../paginas/login.php?notif_id=errorReg");
             exit();
         }
     }
@@ -95,7 +94,7 @@
         $link = $_POST['link'];
         $accountManager = new accountManager();
         $accountManager->actualizarLink($nickName, $link);
-        header("Location: ../paginas/userProfile.php?nickName=".$nickName);
+        header("Location: ../paginas/userProfile.php?nickName=".$nickName . "&notif_id=datosActualizados");
         exit();
     }
 
