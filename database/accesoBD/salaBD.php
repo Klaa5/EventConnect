@@ -47,7 +47,7 @@ include_once "../objetos/sala.php";
             
             $consulta = "SELECT * FROM Sala";
 
-            if($this->eventStateUpdaterDetectorBeta($conexion)) //Si el actualizador de salas no existe o la variable de Schedule esta OFF en esta base de datos...
+            if($this->eventStateUpdaterDetectorBeta($conexion) == false) //Si el actualizador de salas no existe o la variable de Schedule esta OFF en esta base de datos...
             {
                 $this->emergencySalaUpdater($conexion); //Se ejecuta funcion auxiliae
                 echo "Warning, no se ha detectado eventStateUpdater() en la base de datos, se ha utilizado funcion local auxiliar";
