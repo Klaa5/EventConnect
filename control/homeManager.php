@@ -25,7 +25,7 @@
                 {
                     if($sala['Modalidad'] == "virtual")
                     {
-                        $mod = "🌐 Evento Online / Virtual";
+                        $mod = "Evento Online / Virtual";
                     }
                     else
                     {
@@ -78,7 +78,7 @@
                     {
                         if($sala['Modalidad'] == "virtual")
                         {
-                            $mod = "🌐 Evento Online / Virtual";
+                            $mod = "Evento Online / Virtual";
                         }
                         else
                         {
