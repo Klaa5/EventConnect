@@ -6,6 +6,8 @@ if(empty($_SESSION['nickName']))
     header("Location: login.php");
     exit();
 }
+$fechaMin = date("Y-m-d\TH:i");
+$fechaMax = date("Y-m-d\TH:i", strtotime("+5 months"));
 ?>
 
 <!DOCTYPE html>
@@ -84,6 +86,8 @@ if(empty($_SESSION['nickName']))
                     type="datetime-local"
                     name="fechaHora"
                     id="fechaHora"
+                    min="<?php echo $fechaMin; ?>"
+                    max="<?php echo $fechaMax; ?>"
                     required
                 >
 
