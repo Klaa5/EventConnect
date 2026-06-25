@@ -44,7 +44,15 @@ include_once "../objetos/sala.php";
 
         public function getAllSalas($conexion)
         {
+            
             $consulta = "SELECT * FROM Sala";
+
+            if($this->eventStateUpdaterDetectorBeta($conexion)) //Si el actualizador de salas no existe o la variable de Schedule esta OFF en esta base de datos...
+            {
+                $this->emergencySalaUpdater($conexion); //Se ejecuta funcion auxiliae
+                echo "Warning, no se ha detectado eventStateUpdater() en la base de datos, se ha utilizado funcion local auxiliar";
+            }
+
             return mysqli_query($conexion, $consulta); 
         }  
 
@@ -139,7 +147,29 @@ include_once "../objetos/sala.php";
 
         }
 
+        public function eventStateUpdaterDetectorBeta($conexion)    //Revisa si en conexion se logro activar el event scheduler
+        {
+            $resultado = $conexion->query("SHOW VARIABLES LIKE 'event_scheduler'");
+
+            if ($resultado == true)
+            {
+                $tupla = $resultado->fetch_assoc();
+
+                return $tupla['Value'] === 'ON';
+            }
+
+            return false;
+        }
+
+        public function emergencySalaUpdater($conexion)  //Funcion de emergencia por si el evento de la BD no anda
+        {
+            $consulta = "UPDATE Sala SET Estado = 'FINALIZADA' WHERE Fecha < CURDATE() AND Estado = 'EN_PREPARACION'";
+            return $conexion->query($consulta);
+        }
+
     }
+
+    
 
 
 ?>
