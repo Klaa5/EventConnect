@@ -33,7 +33,7 @@
                 return null;
             }
 
-            if($this->eventStateUpdaterDetector())
+            if($this->eventStateUpdaterDetector() == true)  //Si esta bd deja modificar entra
             {
                 @$this->conexion->query("SET GLOBAL event_scheduler = ON;");
             }
