@@ -36,10 +36,6 @@ $ok = $accountManager->verificarUsuario($token);
 
             <?php if ($ok) { ?>
 
-                <div style="font-size:70px; margin-bottom:15px; color:var(--success);">
-                    ✔
-                </div>
-
                 <h1>Cuenta verificada</h1>
 
                 <p style="margin-top:10px; opacity:.9;">
@@ -53,10 +49,6 @@ $ok = $accountManager->verificarUsuario($token);
                 </form>
 
             <?php } else { ?>
-
-                <div style="font-size:70px; margin-bottom:15px; color:var(--danger);">
-                    ✖
-                </div>
 
                 <h1>Error de verificación</h1>
 
