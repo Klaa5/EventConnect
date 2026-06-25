@@ -2,7 +2,7 @@
 session_start();
 
 
-include_once("accountManager.php");
+include_once __DIR__ . "/../control/accountManager.php";
 
 if (!isset($_GET['token'])) {
     die("Token invalido");
