@@ -54,7 +54,7 @@ if(empty($_SESSION['nickName']))
 
             if($sala->getModalidad() == "virtual")
             {
-                $mod = "🌐 Evento Online / Virtual";
+                $mod = "Evento Online / Virtual";
             }
             else
             {
