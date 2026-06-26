@@ -181,15 +181,60 @@ if(
 
     <h3>Participantes</h3>
 
-    <?php
-    $creador = $sala->getNickNameCreador();
-    ?>
+ <?php
+$creador = $sala->getNickNameCreador();
+?>
 
-    <div class="participante-card" onclick="window.location.href='userProfile.php?nickName=<?php echo urlencode($creador); ?>'" style="cursor:pointer;">
-        <strong><?php echo $creador; ?></strong> (Creador) 
-        <?php $datos = $accountManager->obtenerDatosUsuario($creador);
+<div
+    class="participante-card"
+    onclick="window.location.href='userProfile.php?nickName=<?php echo urlencode($creador); ?>'"
+    style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:10px;"
+>
+    <span>
+        <strong><?php echo $creador; ?></strong> (Creador)
+        <?php
+            $datos = $accountManager->obtenerDatosUsuario($creador);
             echo "<i>(" . $datos->getRankPromedio() . ")</i>";
         ?>
+    </span>
+
+    <?php
+    if ($sala->getEstado() == 'FINALIZADA')
+    {
+        if (
+            $_SESSION['nickName'] != $creador &&
+            !$rankManager->evaluado($creador, $_SESSION['nickName'], $sala->getIdSala())
+        )
+        {
+    ?>
+            <form action="../control/controller.php" method="POST" onclick="event.stopPropagation();" style="margin: 0; display: flex; gap: 5px; align-items: center;">
+                <input type="hidden" name="idSala" value="<?php echo $sala->getIdSala(); ?>">
+                <input type="hidden" name="nickNameEvaluado" value="<?php echo trim($creador); ?>">
+
+                <input
+                    type="number"
+                    name="puntaje"
+                    step="1"
+                    min="0"
+                    max="5"
+                    placeholder="0"
+                    required
+                    style="width: 50px; padding: 3px; font-size: 12px; text-align: center;"
+                >
+
+                <button
+                    class="btn-votar-chico"
+                    type="submit"
+                    name="action"
+                    value="Calificar"
+                >
+                    Calificar participante
+                </button>
+            </form>
+    <?php
+        }
+    }
+    ?>
     </div>
 
     <?php
