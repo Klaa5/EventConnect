@@ -4,15 +4,16 @@
     class Conexion
     {
         private $host = "localhost";
-        private $user = ["user", "sitio_equipodos"];
-        private $password = ["user123", "equipodos"];
-        private $bd = ["EventConnect", "sitio_EventConnect"];
+        private $user = ["sitio_equipodos","user"];
+        private $password = ["equipodos", "user123"];
+        private $bd = ["sitio_EventConnect", "EventConnect"];
         private $conexion;  
 
 
         public function iniciarDB()
         {
-            
+            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);  //apaño para que entre al catch aca.
+
             for ($i = 0; $i < 2; $i++) //Intento con las dos BD
             {
                 try
