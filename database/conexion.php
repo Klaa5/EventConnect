@@ -12,7 +12,7 @@
 
         public function iniciarDB()
         {
-            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);  //apaño para que entre al catch aca.
+            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);  //apaño para que entre al catch aca. activo el reporte de rror del mysqlu
 
             for ($i = 0; $i < 2; $i++) //Intento con las dos BD
             {
