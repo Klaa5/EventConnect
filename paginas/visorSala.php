@@ -199,15 +199,14 @@ $creador = $sala->getNickNameCreador();
     </span>
 
     <?php
+    
     if ($sala->getEstado() == 'FINALIZADA')
     {
-        if (
-            $_SESSION['nickName'] != $creador &&
-            !$rankManager->evaluado($creador, $_SESSION['nickName'], $sala->getIdSala())
-        )
+        if ($_SESSION['nickName'] != $creador && !$rankManager->evaluado($creador, $_SESSION['nickName'], $sala->getIdSala()))
         {
     ?>
             <form action="../control/controller.php" method="POST" onclick="event.stopPropagation();" style="margin: 0; display: flex; gap: 5px; align-items: center;">
+                
                 <input type="hidden" name="idSala" value="<?php echo $sala->getIdSala(); ?>">
                 <input type="hidden" name="nickNameEvaluado" value="<?php echo trim($creador); ?>">
 
@@ -232,6 +231,7 @@ $creador = $sala->getNickNameCreador();
                 </button>
             </form>
     <?php
+
         }
     }
     ?>
